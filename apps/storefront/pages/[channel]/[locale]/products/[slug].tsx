@@ -171,24 +171,25 @@ function ProductPage({ product }: InferGetStaticPropsType<typeof getStaticProps>
           <ProductGallery product={product} selectedVariant={selectedVariant} />
         </div>
         <div className="space-y-5 mt-10 md:mt-0">
-          <div>
+          <div className="mb-10 mt-6">
             <h1
               className="text-4xl font-bold tracking-tight text-gray-800"
               data-testid="productName"
             >
               {translate(product, "name")}
             </h1>
-            {shouldDisplayPrice && (
-              <h2 className="text-xl font-bold tracking-tight text-gray-800">
-                {formatPrice(price)}
-              </h2>
-            )}
+
             {!!product.category?.slug && (
               <Link href={paths.category._slug(product?.category?.slug).$url()} passHref>
                 <p className="text-md mt-2 font-medium text-gray-600 cursor-pointer">
                   {translate(product.category, "name")}
                 </p>
               </Link>
+            )}
+            {shouldDisplayPrice && (
+              <h2 className="text-xl font-bold tracking-tight text-gray-800">
+                {formatPrice(price)}
+              </h2>
             )}
           </div>
 
@@ -199,7 +200,7 @@ function ProductPage({ product }: InferGetStaticPropsType<typeof getStaticProps>
             type="submit"
             disabled={isAddToCartButtonDisabled}
             className={clsx(
-              "w-full py-3 px-8 flex items-center justify-center text-base bg-action-1 text-white disabled:bg-disabled hover:bg-white border-2 border-transparent  focus:outline-none",
+              "w-full py-5 px-8 rounded-2xl flex items-center justify-center text-[16px] bg-action-1 text-white disabled:bg-disabled hover:bg-white border-2 border-transparent  focus:outline-none",
               !isAddToCartButtonDisabled && "hover:border-action-1 hover:text-action-1"
             )}
             data-testid="addToCartButton"
@@ -224,7 +225,8 @@ function ProductPage({ product }: InferGetStaticPropsType<typeof getStaticProps>
           {!!addToCartError && <p>{addToCartError}</p>}
 
           {description && (
-            <div className="space-y-6">
+            <div className="space-y-6 !mt-10">
+              <h2 className="text-[20px] !mb-0 font-semibold">Overview</h2>
               <RichText jsonStringData={description} />
             </div>
           )}

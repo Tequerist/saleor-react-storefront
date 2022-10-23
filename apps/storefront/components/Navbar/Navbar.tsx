@@ -49,10 +49,7 @@ export function Navbar() {
     <>
       <div className={clsx(styles.navbar)}>
         <div className={clsx(styles.inner)}>
-          <div className="flex-1 h-full hidden xs:flex">
-            <Menu />
-          </div>
-          <div className="flex-1 flex xs:justify-center">
+          <div className="flex xs:justify-center">
             <Link href={paths.$url()} passHref>
               <a href="pass" className={styles.logo}>
                 <Stamp />
@@ -70,20 +67,28 @@ export function Navbar() {
               <UserMenu />
             )}
             <Link href={externalCheckoutUrl} passHref>
-              <a href="pass" className="ml-2 hidden xs:flex">
+              <a href="pass" className="ml-6 hidden xs:flex">
                 <NavIconButton icon="bag" aria-hidden="true" counter={counter} />
               </a>
             </Link>
             <Link href={paths.search.$url()} passHref>
-              <a href="pass" className="hidden lg:flex ml-2">
+              <a href="pass" className="hidden lg:flex ml-6">
                 <NavIconButton icon="spyglass" data-testid="searchIcon" />
               </a>
             </Link>
             <NavIconButton
               icon="menu"
-              className="ml-2 lg:hidden"
+              className="ml-4 lg:hidden"
               onClick={() => setBurgerOpen(true)}
             />
+          </div>
+        </div>
+        {/* categories menu */}
+        <div className={clsx(styles.innerTwoWrap)}>
+          <div className={clsx(styles.innerTwo)}>
+            <div className="flex-2 h-full hidden xs:flex">
+              <Menu />
+            </div>
           </div>
         </div>
       </div>

@@ -75,7 +75,7 @@ export function ProductCollection({
   const products = mapEdgesToItems(data?.products);
   if (products.length === 0) {
     return (
-      <Text size="xl" color="secondary" data-testid="noResultsText">
+      <Text size="md" color="secondary" data-testid="noResultsText">
         {t.formatMessage(messages.noProducts)}
       </Text>
     );

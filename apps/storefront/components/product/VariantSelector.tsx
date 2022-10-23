@@ -43,25 +43,29 @@ export function VariantSelector({ product, selectedVariantID }: VariantSelectorP
   return (
     <div className="w-full">
       <RadioGroup value={selectedVariant} onChange={onChange}>
-        <div className="space-y-4">
+        <div className="space-y-4 mb-8">
           {variants.map((variant) => (
             <RadioGroup.Option
               key={variant.id}
               value={variant.id}
               className={({ checked }) =>
-                clsx("bg-main w-full", checked && "bg-brand", !checked && "")
+                clsx(
+                  "w-full",
+                  checked && "bg-black rounded-2xl text-white font-normal",
+                  !checked && "border-1"
+                )
               }
             >
               {({ checked }) => (
                 <div
                   className={clsx(
-                    "bg-white w-full h-full relative cursor-pointer object-contain border-2",
-                    checked && "border-brand",
-                    !checked && "hover:border-main border-main-2"
+                    "border-black p-2 rounded-2xl w-full h-full relative cursor-pointer object-contain",
+                    checked && "border-1 border-main-2",
+                    !checked && "bg-gray-100 hover:border-main border-main-2"
                   )}
                 >
                   <RadioGroup.Label as="div" className="w-full justify-between p-4">
-                    <div className="flex flex-row gap-2 w-full font-semibold text-md">
+                    <div className="flex font-semibold flex-row gap-2 w-full font-semibold text-md">
                       <div className="grow" data-testid={`variantOf${variant.name}`}>
                         {translate(variant, "name")}
                       </div>

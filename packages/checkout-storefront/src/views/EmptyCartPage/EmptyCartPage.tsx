@@ -12,11 +12,11 @@ export const EmptyCartPage = () => {
 
   return (
     <div className="w-full flex flex-row justify-center lg:mt-10">
-      <div className="flex flex-col justify-start border rounded-lg border-border-secondary section">
-        <Title>{formatMessage(emptyCartMessages.emptyCart)}</Title>
+      <div className="flex flex-col justify-center w-1/2 items-center section">
+        <Title className="emptycarthead">{formatMessage(emptyCartMessages.emptyCart)}</Title>
         <Text>{formatMessage(emptyCartMessages.addToCardToContinue)}</Text>
         <Button
-          className="mt-3 md:self-end"
+          className="mt-3 emptycartbtn justify-center w-fit !bg-gray !text-white !rounded-2xl px-4"
           ariaLabel={formatMessage(emptyCartLabels.goBackToStore)}
           onClick={goBack}
           variant="secondary"

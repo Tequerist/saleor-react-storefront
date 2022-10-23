@@ -37,8 +37,8 @@ export function AddressBookCard({ address, onRefreshBook }: AddressBookCardProps
   };
 
   return (
-    <div className="justify-between flex flex-col checkout-section-container md:mx-2 mb-2">
-      {!!cardHeader && <p className="text-md font-semibold mb-1">{cardHeader}</p>}
+    <div className="justify-between flex flex-col checkout-section-container p-8 w-full rounded-2xl md:mx-2 mb-2">
+      {!!cardHeader && <p className="text-md font-semibold mb-6">{cardHeader}</p>}
       <AddressDisplay address={address} />
       {!address.isDefaultBillingAddress && (
         <Button

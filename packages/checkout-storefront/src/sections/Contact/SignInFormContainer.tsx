@@ -26,7 +26,7 @@ export const SignInFormContainer: React.FC<PropsWithChildren<SignInFormContainer
   return (
     <div className="section">
       <div className="flex flex-col mb-2">
-        <div className="flex flex-row justify-between items-baseline">
+        <div className="">
           <Title>{title}</Title>
           <div className="flex flex-row">
             {redirectSubtitle && (

@@ -8,6 +8,7 @@ import { useIntl } from "react-intl";
 import { messages } from "@/components/translations";
 import { DEMO_MODE } from "@/lib/const";
 import { usePaths } from "@/lib/paths";
+import LoginIcon from "./loginIcon.svg";
 
 export type OptionalQuery = {
   next?: string;
@@ -61,24 +62,33 @@ function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-no-repeat bg-cover bg-center bg-gradient-to-r from-blue-100 to-blue-500">
+    <div className="min-h-screen bg-no-repeat bg-cover bg-center bg-gradient-to-r from-blue-300 to-indigo-400">
       <div className="flex justify-end">
-        <div className="bg-white min-h-screen w-1/2 flex justify-center items-center">
-          <div>
+        {/* <div className="bg-white min-h-screen w-1/2 flex justify-center items-center">
+          <div> */}
+        {/* Left LoginBG */}
+        <div className="w-0 !sm:w-0 lg:w-1/2  flex items-center justify-center">
+          <LoginIcon />
+        </div>
+        {/* Right Login Card */}
+        <div className="bg-white min-h-screen w-full !sm:w-full lg:w-1/2  flex justify-center items-center">
+          <div className="lg:w-3/6">
             <form onSubmit={handleLogin}>
               <div>
-                <span className="text-sm text-gray-900">
+                <span className="text-[15px] py-2 !lg:py-10 !font-thin text-gray-400">
                   {t.formatMessage(messages.loginWelcomeMessage)}
                 </span>
-                <h1 className="text-2xl font-bold">{t.formatMessage(messages.loginHeader)}</h1>
+                <h1 className="text-[28px] py-1 pb-6 font-bold">
+                  {t.formatMessage(messages.loginHeader)}
+                </h1>
               </div>
 
               <div className="my-3">
-                <label htmlFor="email" className="block text-md mb-2">
+                <label htmlFor="email" className="block text-[14px] mb-2">
                   {t.formatMessage(messages.loginEmailFieldLabel)}
                 </label>
                 <input
-                  className="px-4 w-full border-2 py-2 rounded-md text-sm outline-none"
+                  className="px-4 w-full border-1 !border-gray-300 py-4 !rounded-3xl text-[16px] outline-none"
                   type="email"
                   id="email"
                   spellCheck={false}
@@ -88,11 +98,11 @@ function LoginPage() {
                 />
               </div>
               <div className="mt-5">
-                <label htmlFor="password" className="block text-md mb-2">
+                <label htmlFor="password" className="block text-[14px] mb-2">
                   {t.formatMessage(messages.loginPasswordFieldLabel)}
                 </label>
                 <input
-                  className="px-4 w-full border-2 py-2 rounded-md text-sm outline-none"
+                  className="px-4 w-full border-1 !border-gray-300 py-4 !rounded-3xl text-md outline-none"
                   type="password"
                   id="password"
                   spellCheck={false}
@@ -102,14 +112,14 @@ function LoginPage() {
                 />
               </div>
               <div className="flex justify-between">
-                <span className="text-sm text-blue-700 hover:underline cursor-pointer pt-2">
+                <span className="text-sm text-blue-700 hover:underline cursor-pointer pt-4">
                   {t.formatMessage(messages.loginRemindPasswordButtonLabel)}
                 </span>
               </div>
               <div className="">
                 <button
                   type="submit"
-                  className="mt-4 mb-3 w-full bg-green-500 hover:bg-green-400 text-white py-2 rounded-md transition duration-100"
+                  className="text-[16px] mt-4 mb-3 w-full bg-brand hover:bg-black  text-white py-4 rounded-3xl transition duration-100"
                 >
                   {t.formatMessage(messages.logIn)}
                 </button>
@@ -118,7 +128,7 @@ function LoginPage() {
                 )}
               </div>
             </form>
-            <p className="mt-8">
+            <p className="mt-8 text-[14px] underline text-center">
               <Link href={paths.account.register.$url()} passHref>
                 <a href="pass">{t.formatMessage(messages.createAccount)}</a>
               </Link>

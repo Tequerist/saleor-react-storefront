@@ -68,7 +68,7 @@ const theme = {
     },
   },
   fontFamily: {
-    sans: ["Inter"],
+    sans: ["Poppins"],
   },
   spacing: {
     px: "1px",

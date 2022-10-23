@@ -16,7 +16,7 @@ export interface PageHeroProps {
 export function PageHero({ title, description, pills = [] }: PageHeroProps) {
   return (
     <Box>
-      <div className="sm:ml-20 sm:text-left">
+      <div className="text-center sm:ml-20 sm:text-center">
         <h1 className="text-5xl font-bold mb-4" data-testid={`titleOf${title}`}>
           {title}
         </h1>
@@ -27,7 +27,7 @@ export function PageHero({ title, description, pills = [] }: PageHeroProps) {
           </div>
         )}
         {pills.length > 0 && (
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex gap-2 flex-wrap justify-center">
             {pills.map((pill) => (
               <ChipButton key={pill.label} label={pill.label} onClick={pill.onClick} />
             ))}

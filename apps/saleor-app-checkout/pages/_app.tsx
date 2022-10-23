@@ -48,6 +48,7 @@ export default function App(props: AppProps) {
               box-sizing: border-box;
             }
             body {
+              font-family: "Poppins", "Helvetica", "Arial", sans-serif;
               font-size: 1rem;
               margin: 0;
               background: transparent !important;

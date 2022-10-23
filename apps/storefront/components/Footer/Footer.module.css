@@ -1,9 +1,21 @@
 .footer {
-  @apply sm:container mb-18 sm:mb-15 mt-16;
+  @apply mb-4 sm:mb-3 mt-16;
+  background: linear-gradient(90deg, #4776e6 0%, #8e54e9 100%);
 }
 
 .footer-inner {
-  @apply px-6 border-l-0 border-r-0 sm:border-l-2 sm:border-r-2;
+  @apply container;
+  box-shadow: none;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  padding-top: 60px !important;
+}
+.secondFooterWrap {
+  background-color: #fff;
+}
+.secondFooter {
+  @apply flex items-center container pt-3;
 }
 
 @screen sm {
@@ -14,6 +26,7 @@
 
 .menu {
   @apply list-none mb-8;
+  margin-right: 30px;
 }
 
 .menu li + li {
@@ -22,8 +35,15 @@
 
 .menu-heading {
   @apply block text-md font-bold mb-4 cursor-pointer hover:underline;
+  margin-bottom: 30px;
+  color: #fff;
 }
 
 .menu-link {
   @apply text-base cursor-pointer hover:underline;
+  color: #fff;
+  font-weight: 400;
+}
+.menu-link:hover {
+  color: #000;
 }

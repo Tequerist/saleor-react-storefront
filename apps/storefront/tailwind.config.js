@@ -56,7 +56,7 @@ module.exports = {
         DEFAULT: "1px",
       },
       fontFamily: {
-        sans: ["Inconsolata"],
+        sans: ["Poppins"],
       },
       fontWeight: {
         normal: 400,

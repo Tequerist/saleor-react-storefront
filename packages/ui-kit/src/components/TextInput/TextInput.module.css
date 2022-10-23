@@ -1,5 +1,5 @@
 :local(.text-input-container) {
-  @apply relative mb-3 w-full;
+  @apply relative mb-5 w-full;
 }
 
 :local(.text-input-label) {
@@ -21,6 +21,9 @@
 }
 
 .text-input {
+  border-radius: 14px !important;
+  background-color: RGB(243, 244, 246);
+  border-color: transparent !important;
   transition: border 0.2s ease-in-out;
   @apply h-12 rounded text-base border border-border-primary appearance-none w-full focus:border-border-active focus:outline-none active:outline-none active:border-border-primary py-3 pt-5 pb-2;
   padding-left: calc(theme("spacing.3") - theme("borderWidth.DEFAULT"));

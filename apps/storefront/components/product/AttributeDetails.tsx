@@ -19,14 +19,14 @@ export function AttributeDetails({ product, selectedVariant }: AttributeDetailsP
   }
   return (
     <div>
-      <p className="text-lg mt-2 font-medium text-gray-500">
+      <p className="text-[20px] mt-10 mb-4 font-semibold text-black">
         {t.formatMessage(messages.attributes)}
       </p>
       <div>
         {attributes.map((attribute) => (
           <div key={attribute.attribute.id} className="grid grid-cols-2">
             <div>
-              <p className="text-base">{translate(attribute.attribute, "name")}</p>
+              <p className="text-base mb-3">{translate(attribute.attribute, "name")}</p>
             </div>
             <div>
               {attribute.values.map((value, index) => {
@@ -35,7 +35,7 @@ export function AttributeDetails({ product, selectedVariant }: AttributeDetailsP
                 }
                 return (
                   <div key={value.id}>
-                    <p className="text-base">
+                    <p className="text-base mb-3">
                       {translate(value, "name")}
                       {attribute.values.length !== index + 1 && <div>{" | "}</div>}
                     </p>

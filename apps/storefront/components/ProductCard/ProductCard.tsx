@@ -34,8 +34,8 @@ export function ProductCard({ product }: ProductCardProps) {
     <li key={product.id} className="w-full">
       <Link href={paths.products._slug(product.slug).$url()} prefetch={false} passHref>
         <a href="pass">
-          <div className="bg-main active:bg-brand w-full aspect-1">
-            <div className="bg-white w-full h-full relative object-contain ">
+          <div className="w-full aspect-1">
+            <div className="bg-gray-100 rounded-[20px] w-full h-full relative object-contain">
               {thumbnailUrl ? (
                 <Image src={thumbnailUrl} width={512} height={512} />
               ) : (
@@ -46,13 +46,13 @@ export function ProductCard({ product }: ProductCardProps) {
             </div>
           </div>
           <p
-            className="block mt-2 text-md font-extrabold text-main truncate"
+            className="block mt-5 text-md font-extrabold text-main truncate"
             data-testid={`productName${product.name}`}
           >
             {translate(product, "name")}
           </p>
           {secondaryDescription && (
-            <p className="block text-md font-normal text-main underline">{secondaryDescription}</p>
+            <p className="block py-1 text-gray-500 font-medium text-base">{secondaryDescription}</p>
           )}
         </a>
       </Link>

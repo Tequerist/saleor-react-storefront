@@ -10,7 +10,7 @@ class Document extends NextDocument {
           <meta charSet="utf-8" />
           <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
           />
         </Head>
         <body spellCheck={false}>

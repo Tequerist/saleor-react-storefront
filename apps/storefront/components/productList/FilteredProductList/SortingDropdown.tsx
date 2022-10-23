@@ -36,7 +36,7 @@ export function SortingDropdown({ optionToggle, chosen }: SortingDropdownProps) 
         leaveTo="transform opacity-0 scale-95"
       >
         <Menu.Items
-          className="focus:outline-none absolute left-0 w-56 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-10"
+          className="focus:outline-none absolute left-0 w-80 rounded-2xl p-4 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-10"
           data-testid="sortingDropdown"
         >
           {options?.map((option) => (
@@ -46,7 +46,9 @@ export function SortingDropdown({ optionToggle, chosen }: SortingDropdownProps) 
                   type="button"
                   onClick={() => optionToggle(option.field, option.direction)}
                   className={clsx(
-                    active ? "border-brand text-brand" : "border-transparent text-gray-900",
+                    active
+                      ? "text-brand bg-brand/[.06] border-transparent rounded-2xl"
+                      : "border-transparent text-gray-900",
                     "group flex w-full items-center px-2 py-2 text-base border-2"
                   )}
                   data-testid={`sortByOption${option.label}`}

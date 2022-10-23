@@ -2,10 +2,10 @@
 
 @layer components {
   .checkout-form-container {
-    @apply flex flex-col items-end lg:w-1/2;
+    @apply flex flex-col items-end lg:w-1/2 px-10;
   }
   .checkout-form {
-    @apply border border-border-secondary rounded-lg flex flex-col w-full;
+    @apply border-0 border-border-secondary rounded-lg flex flex-col w-full;
   }
 
   .section {
@@ -17,6 +17,15 @@
   }
 
   .pay-button {
-    @apply w-full md:w-28 self-end mt-5;
+    background-color: #000 !important;
+    border-color: transparent !important;
+    border-radius: 14px;
+    height: 5rem !important;
+    width: 60% !important;
+    @apply md:w-28 self-end mt-5;
+  }
+  .pay-button:hover {
+    background-color: transparent !important;
+    border: 1px solid #000 !important;
   }
 }

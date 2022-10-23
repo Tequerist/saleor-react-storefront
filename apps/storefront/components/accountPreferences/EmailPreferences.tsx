@@ -47,16 +47,18 @@ export function EmailPreferences() {
   });
 
   return (
-    <div className="mt-4 mb-4">
-      <h2 className="checkout-section-header-active mb-2">Change email</h2>
+    <div className="rounded-3xl">
+      <h2 className="checkout-section-header-active text-[18px] font-semibold mb-6">
+        Change email
+      </h2>
       <form onSubmit={onEmailPreferenceSubmit}>
         <div className="grid grid-cols-12 gap-4 w-full">
           <div className="col-span-full">
-            <label htmlFor="newEmail" className="block pl-1 text-sm font-medium text-gray-700">
+            <label htmlFor="newEmail" className="block pl-1 text-[14px] font-medium text-gray-700">
               {t.formatMessage(messages.loginEmailFieldLabel)}
             </label>
             <input
-              className="px-4 py-2 rounded-md text-sm outline-none w-full"
+              className="px-4 py-4 rounded-2xl text-[15px] outline-none w-full border-0 mt-2 mb-4 bg-gray-100"
               type="email"
               id="newEmail"
               spellCheck={false}
@@ -72,11 +74,11 @@ export function EmailPreferences() {
         </div>
         <div className="grid grid-cols-12 gap-4 w-full mt-2">
           <div className="col-span-full">
-            <label htmlFor="password" className="block pl-1 text-sm font-medium text-gray-700">
+            <label htmlFor="password" className="block pl-1 text-[14px] font-medium text-gray-700">
               {t.formatMessage(messages.loginPasswordFieldLabel)}
             </label>
             <input
-              className="px-4 py-2 rounded-md text-sm outline-none w-full"
+              className="px-4 py-4 rounded-2xl text-[15px] outline-none w-full border-0 mt-2  mb-4 bg-gray-100"
               type="password"
               id="password"
               spellCheck={false}
@@ -92,7 +94,7 @@ export function EmailPreferences() {
         {!!successMessage && <p className="mt-2 text-sm text-green-600">{successMessage}</p>}
         <div>
           <button
-            className="mt-2 w-40 bg-green-500 hover:bg-green-400 text-white py-2 rounded-md transition duration-100"
+            className="mt-2 w-40 bg-gradient-to-b from-green-400 to-green-500 hover:bg-green-400 text-white py-2 text-[15px] rounded-2xl transition duration-100"
             onClick={() => onEmailPreferenceSubmit()}
             type="submit"
           >

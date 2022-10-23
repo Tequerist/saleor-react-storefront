@@ -7,10 +7,10 @@ import { PasswordPreferences } from "@/components/accountPreferences/PasswordPre
 function AccountPreferencesPage() {
   return (
     <>
-      <div className="checkout-section-container">
+      <div className="checkout-section-container rounded-3xl p-10">
         <EmailPreferences />
       </div>
-      <div className="checkout-section-container">
+      <div className="checkout-section-container rounded-3xl p-10">
         <PasswordPreferences />
       </div>
     </>

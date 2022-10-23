@@ -41,7 +41,7 @@ export function BillingAddressSection({ active, checkout }: BillingAddressSectio
 
   return (
     <>
-      <div className="mt-4 mb-4">
+      <div className="mt-4 mb-4 !bg-black">
         <h2
           className={active ? "checkout-section-header-active" : "checkout-section-header-disabled"}
         >

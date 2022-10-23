@@ -34,8 +34,8 @@ export function HomepageBlock({ menuItem }: HomepageBlockProps) {
   }
   return (
     <div className="pb-8" data-testid="category">
-      <h1
-        className="text-3xl font-extrabold tracking-tight text-gray-900 pb-4"
+      {/* <h1
+        className="text-3xl font-extrabold tracking-tight text-gray-900 pb-6"
         data-testid={`categoryName${menuItem.name}`}
       >
         {translate(menuItem, "name")}
@@ -47,7 +47,23 @@ export function HomepageBlock({ menuItem }: HomepageBlockProps) {
             <p className="text-base">{t.formatMessage(messages.more)}</p>
           </a>
         </Link>
+      </div> */}
+      <div className="container flex justify-between px-0 py-4">
+        <h1
+          className="text-3xl font-extrabold tracking-tight text-gray-900 pb-6"
+          data-testid={`categoryName${menuItem.name}`}
+        >
+          {translate(menuItem, "name")}
+        </h1>
+        <div className="flex flex-row-reverse py-2 px-4 rounded-[10px] border-solid border-2 border-Slate-500 h-max hover:bg-black hover:text-white hover:border-black">
+          <Link href={link} passHref>
+            <a href="pass mb-0">
+              <p className="text-base">{t.formatMessage(messages.more)}</p>
+            </a>
+          </Link>
+        </div>
       </div>
+      <ProductCollection filter={filter} allowMore={false} />
     </div>
   );
 }

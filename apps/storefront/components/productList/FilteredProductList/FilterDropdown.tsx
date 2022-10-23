@@ -43,7 +43,7 @@ export function FilterDropdown({
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="focus:outline-none absolute left-0 w-56 origin-top-right  bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-10">
+        <Menu.Items className="ffocus:outline-none absolute left-0 w-56 origin-top-right rounded-2xl p-2  bg-white ring-1 ring-black ring-opacity-5 z-10">
           {options?.map((option) => (
             <Menu.Item key={option.id}>
               {({ active }) => (
@@ -51,7 +51,9 @@ export function FilterDropdown({
                   type="button"
                   onClick={() => optionToggle(attributeSlug, option.slug)}
                   className={clsx(
-                    active ? "border-brand text-brand" : "border-transparent text-gray-900",
+                    active
+                      ? "text-brand bg-brand/[.06] border-transparent rounded-2xl"
+                      : "border-transparent text-gray-900",
                     "group flex w-full items-center px-2 py-2 text-base border-2"
                   )}
                   data-testid={`filterAttributeValue${option.label}`}

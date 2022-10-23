@@ -93,16 +93,18 @@ export function Footer({ className, ...rest }: FooterProps) {
             ))}
           </div>
         </div>
-        <div className="flex items-center">
-          <p className="text-sm text-main-3 flex-grow">
-            © Copyright 2018 - {new Date().getFullYear()} Saleor Commerce
+      </Box>
+      <div className={clsx(styles.secondFooterWrap)}>
+        <div className={clsx(styles.secondFooter)}>
+          <p className="text-sm text-main-3 flex-grow text-black">
+            © Copyright 2018 - {new Date().getFullYear()} Website Name
           </p>
           <div className="invisible md:visible flex gap-4">
             <ChannelDropdown horizontalAlignment="right" />
             <LocaleDropdown horizontalAlignment="right" />
           </div>
         </div>
-      </Box>
+      </div>
     </footer>
   );
 }

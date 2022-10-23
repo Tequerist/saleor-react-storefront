@@ -1,9 +1,10 @@
 .container {
-  @apply relative inline-block min-w-50 w-full;
+  @apply relative inline-block min-w-50;
 }
 
 .select {
-  @apply h-10 border rounded border-border-primary py-2 px-3 pr-12 w-full text-base appearance-none cursor-pointer;
+  border-radius: 14px !important;
+  @apply h-10 border rounded border-border-primary py-2 px-3 pr-10 w-full text-base appearance-none cursor-pointer;
 }
 
 .select:disabled {
