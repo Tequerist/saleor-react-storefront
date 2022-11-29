@@ -19,9 +19,9 @@ export function BaseRegionsDropdown({
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
-        <Menu.Button className="inline-flex w-full justify-left py-2 text-md font-extrabold text-gray-400  hover:bg-opacity-30 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+        <Menu.Button className="inline-flex w-full justify-left py-2 text-[14px] font-extrabold text-gray-400  hover:bg-opacity-30 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
           {label}
-          <ChevronDownIcon className="ml-2 -mr-1 h-5 w-5 " aria-hidden="true" />
+          <ChevronDownIcon className="ml-2 -mr-1 h-4 w-4 " aria-hidden="true" />
         </Menu.Button>
       </div>
       <Transition

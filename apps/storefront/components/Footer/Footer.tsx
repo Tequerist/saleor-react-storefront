@@ -38,7 +38,7 @@ export function Footer({ className, ...rest }: FooterProps) {
         <div className="flex mb-14 sm:mb-10">
           <Link href={paths.$url()} passHref legacyBehavior>
             <a href="pass" className="hidden sm:inline-block">
-              <div className="mt-px group block h-16 w-28 relative grayscale">
+              <div className="mt-px group block h-16 w-28 relative white">
                 <Image src="/saleor.svg" alt="Saleor logo" layout="fill" />
               </div>
             </a>
@@ -53,7 +53,8 @@ export function Footer({ className, ...rest }: FooterProps) {
                     rel="noreferrer"
                     className={styles["menu-heading"]}
                   >
-                    {item?.name}
+                    {/* {item?.name} */}
+                    Link Head
                   </a>
                 ) : (
                   <Link
@@ -62,7 +63,8 @@ export function Footer({ className, ...rest }: FooterProps) {
                     legacyBehavior
                   >
                     <a href="pass" className={styles["menu-heading"]}>
-                      {item?.name}
+                      {/* {item?.name} */}
+                      Link Head
                     </a>
                   </Link>
                 )}
