@@ -129,7 +129,7 @@ function LoginPage() {
               </div>
             </form>
             <p className="mt-8 text-[14px] underline text-center">
-              <Link href={paths.account.register.$url()}>
+              <Link href={paths.account.register.$url()} legacyBehavior>
                 {t.formatMessage(messages.createAccount)}
               </Link>
             </p>
