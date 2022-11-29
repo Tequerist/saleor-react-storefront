@@ -4,13 +4,14 @@ import { getAdyenClient } from "@/saleor-app-checkout/backend/payments/providers
 import { allowCors } from "@/saleor-app-checkout/backend/utils";
 import { createParseAndValidateBody } from "@/saleor-app-checkout/utils";
 import type { DetailsRequest as AdyenDetailsRequest } from "@adyen/api-library/lib/src/typings/checkout/detailsRequest";
-import { withSentry } from "@sentry/nextjs";
 import {
   PostAdyenDropInPaymentsDetailsResponse,
   postDropInAdyenPaymentsDetailsBody,
 } from "checkout-common";
 import { NextApiHandler } from "next";
 import invariant from "ts-invariant";
+import { getSaleorApiUrlFromRequest } from "@/saleor-app-checkout/backend/auth";
+import { unpackThrowable } from "@/saleor-app-checkout/utils/unpackErrors";
 
 const parseAndValidateBody = createParseAndValidateBody(postDropInAdyenPaymentsDetailsBody);
 
@@ -30,8 +31,15 @@ const DropInAdyenPaymentsDetailsHandler: NextApiHandler<
     return;
   }
 
+  const [saleorApiUrlError, saleorApiUrl] = unpackThrowable(() => getSaleorApiUrlFromRequest(req));
+
+  if (saleorApiUrlError) {
+    res.status(400).json({ message: saleorApiUrlError.message });
+    return;
+  }
+
   try {
-    const { checkout } = await getAdyenClient();
+    const { checkout } = await getAdyenClient(saleorApiUrl);
     const payment = await checkout.paymentsDetails(body.adyenStateData as AdyenDetailsRequest);
     const orderId = getOrderIdFromAdditionalData(payment.additionalData || {});
     invariant(orderId, "orderId should be set at this point. Please file a bug report.");
@@ -45,4 +53,4 @@ const DropInAdyenPaymentsDetailsHandler: NextApiHandler<
   }
 };
 
-export default withSentry(allowCors(DropInAdyenPaymentsDetailsHandler));
+export default allowCors(DropInAdyenPaymentsDetailsHandler);

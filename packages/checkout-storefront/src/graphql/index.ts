@@ -1308,7 +1308,7 @@ export type AttributeDeleted = Event & {
 };
 
 /** An enumeration. */
-export type AttributeEntityTypeEnum = "PAGE" | "PRODUCT" | "PRODUCT_VARIANT";
+export type AttributeEntityTypeEnum = "PAGE" | "PRODUCT";
 
 export type AttributeError = {
   __typename?: "AttributeError";
@@ -1345,7 +1345,6 @@ export type AttributeFilterInput = {
   isVariantOnly?: InputMaybe<Scalars["Boolean"]>;
   metadata?: InputMaybe<Array<MetadataFilter>>;
   search?: InputMaybe<Scalars["String"]>;
-  slugs?: InputMaybe<Array<Scalars["String"]>>;
   type?: InputMaybe<AttributeTypeEnum>;
   valueRequired?: InputMaybe<Scalars["Boolean"]>;
   visibleInStorefront?: InputMaybe<Scalars["Boolean"]>;
@@ -1615,18 +1614,12 @@ export type AttributeValueCreateInput = {
   fileUrl?: InputMaybe<Scalars["String"]>;
   /** Name of a value displayed in the interface. */
   name: Scalars["String"];
-  /**
-   * Represents the text of the attribute value, plain text without formating.
-   *
-   * DEPRECATED: this field will be removed in Saleor 4.0.The plain text attribute hasn't got predefined value, so can be specified only from instance that supports the given attribute.
-   */
+  /** Represents the text of the attribute value, plain text without formating. */
   plainText?: InputMaybe<Scalars["String"]>;
   /**
    * Represents the text of the attribute value, includes formatting.
    *
    * Rich text format. For reference see https://editorjs.io/
-   *
-   * DEPRECATED: this field will be removed in Saleor 4.0.The rich text attribute hasn't got predefined value, so can be specified only from instance that supports the given attribute.
    */
   richText?: InputMaybe<Scalars["JSONString"]>;
   /** Represent value of the attribute value (e.g. color values for swatch attributes). */
@@ -1806,18 +1799,12 @@ export type AttributeValueUpdateInput = {
   fileUrl?: InputMaybe<Scalars["String"]>;
   /** Name of a value displayed in the interface. */
   name?: InputMaybe<Scalars["String"]>;
-  /**
-   * Represents the text of the attribute value, plain text without formating.
-   *
-   * DEPRECATED: this field will be removed in Saleor 4.0.The plain text attribute hasn't got predefined value, so can be specified only from instance that supports the given attribute.
-   */
+  /** Represents the text of the attribute value, plain text without formating. */
   plainText?: InputMaybe<Scalars["String"]>;
   /**
    * Represents the text of the attribute value, includes formatting.
    *
    * Rich text format. For reference see https://editorjs.io/
-   *
-   * DEPRECATED: this field will be removed in Saleor 4.0.The rich text attribute hasn't got predefined value, so can be specified only from instance that supports the given attribute.
    */
   richText?: InputMaybe<Scalars["JSONString"]>;
   /** Represent value of the attribute value (e.g. color values for swatch attributes). */
@@ -1888,26 +1875,6 @@ export type BulkStockError = {
   message?: Maybe<Scalars["String"]>;
   /** List of attribute values IDs which causes the error. */
   values?: Maybe<Array<Scalars["ID"]>>;
-};
-
-/**
- * Synchronous webhook for calculating checkout/order taxes.
- *
- * Added in Saleor 3.7.
- *
- * Note: this API is currently in Feature Preview and can be subject to changes at later point.
- */
-export type CalculateTaxes = Event & {
-  __typename?: "CalculateTaxes";
-  /** Time of the event. */
-  issuedAt?: Maybe<Scalars["DateTime"]>;
-  /** The user or application that triggered the event. */
-  issuingPrincipal?: Maybe<IssuingPrincipal>;
-  /** The application receiving the webhook. */
-  recipient?: Maybe<App>;
-  taxBase: TaxableObject;
-  /** Saleor version that triggered the event. */
-  version?: Maybe<Scalars["String"]>;
 };
 
 export type CardInput = {
@@ -2168,7 +2135,6 @@ export type CategoryFilterInput = {
   ids?: InputMaybe<Array<Scalars["ID"]>>;
   metadata?: InputMaybe<Array<MetadataFilter>>;
   search?: InputMaybe<Scalars["String"]>;
-  slugs?: InputMaybe<Array<Scalars["String"]>>;
 };
 
 export type CategoryInput = {
@@ -2182,8 +2148,20 @@ export type CategoryInput = {
    * Rich text format. For reference see https://editorjs.io/
    */
   description?: InputMaybe<Scalars["JSONString"]>;
+  /**
+   * Fields required to update the category metadata.
+   *
+   * Added in Saleor 3.8.
+   */
+  metadata?: InputMaybe<Array<MetadataInput>>;
   /** Category name. */
   name?: InputMaybe<Scalars["String"]>;
+  /**
+   * Fields required to update the category private metadata.
+   *
+   * Added in Saleor 3.8.
+   */
+  privateMetadata?: InputMaybe<Array<MetadataInput>>;
   /** Search engine optimization fields. */
   seo?: InputMaybe<SeoInput>;
   /** Category slug. */
@@ -2777,14 +2755,6 @@ export type Checkout = Node &
     stockReservationExpires?: Maybe<Scalars["DateTime"]>;
     /** The price of the checkout before shipping, with taxes included. */
     subtotalPrice: TaxedMoney;
-    /**
-     * Returns True if checkout has to be exempt from taxes.
-     *
-     * Added in Saleor 3.8.
-     *
-     * Note: this API is currently in Feature Preview and can be subject to changes at later point.
-     */
-    taxExemption: Scalars["Boolean"];
     /** The checkout's token. */
     token: Scalars["UUID"];
     /** The sum of the the checkout line prices, with all the taxes,shipping costs, and discounts included. */
@@ -3201,12 +3171,6 @@ export type CheckoutLineInput = {
    */
   forceNewLine?: InputMaybe<Scalars["Boolean"]>;
   /**
-   * Fields required to update the object's metadata.
-   *
-   * Added in Saleor 3.8.
-   */
-  metadata?: InputMaybe<Array<MetadataInput>>;
-  /**
    * Custom price of the item. Can be set only by apps with `HANDLE_CHECKOUTS` permission. When the line with the same variant will be provided multiple times, the last price will be used.
    *
    * Added in Saleor 3.1.
@@ -3606,8 +3570,20 @@ export type CollectionCreateInput = {
   description?: InputMaybe<Scalars["JSONString"]>;
   /** Informs whether a collection is published. */
   isPublished?: InputMaybe<Scalars["Boolean"]>;
+  /**
+   * Fields required to update the collection metadata.
+   *
+   * Added in Saleor 3.8.
+   */
+  metadata?: InputMaybe<Array<MetadataInput>>;
   /** Name of the collection. */
   name?: InputMaybe<Scalars["String"]>;
+  /**
+   * Fields required to update the collection private metadata.
+   *
+   * Added in Saleor 3.8.
+   */
+  privateMetadata?: InputMaybe<Array<MetadataInput>>;
   /** List of products to be added to the collection. */
   products?: InputMaybe<Array<Scalars["ID"]>>;
   /**
@@ -3732,7 +3708,6 @@ export type CollectionFilterInput = {
   metadata?: InputMaybe<Array<MetadataFilter>>;
   published?: InputMaybe<CollectionPublished>;
   search?: InputMaybe<Scalars["String"]>;
-  slugs?: InputMaybe<Array<Scalars["String"]>>;
 };
 
 export type CollectionInput = {
@@ -3748,8 +3723,20 @@ export type CollectionInput = {
   description?: InputMaybe<Scalars["JSONString"]>;
   /** Informs whether a collection is published. */
   isPublished?: InputMaybe<Scalars["Boolean"]>;
+  /**
+   * Fields required to update the collection metadata.
+   *
+   * Added in Saleor 3.8.
+   */
+  metadata?: InputMaybe<Array<MetadataInput>>;
   /** Name of the collection. */
   name?: InputMaybe<Scalars["String"]>;
+  /**
+   * Fields required to update the collection private metadata.
+   *
+   * Added in Saleor 3.8.
+   */
+  privateMetadata?: InputMaybe<Array<MetadataInput>>;
   /**
    * Publication date. ISO 8601 standard.
    *
@@ -4399,12 +4386,6 @@ export type CustomerEventsEnum =
 
 export type CustomerFilterInput = {
   dateJoined?: InputMaybe<DateRangeInput>;
-  /**
-   * Filter by ids.
-   *
-   * Added in Saleor 3.8.
-   */
-  ids?: InputMaybe<Array<Scalars["ID"]>>;
   metadata?: InputMaybe<Array<MetadataFilter>>;
   numberOfOrders?: InputMaybe<IntRangeInput>;
   placedOrders?: InputMaybe<DateRangeInput>;
@@ -4638,6 +4619,18 @@ export type DigitalContentInput = {
   automaticFulfillment?: InputMaybe<Scalars["Boolean"]>;
   /** Determines how many times a download link can be accessed by a customer. */
   maxDownloads?: InputMaybe<Scalars["Int"]>;
+  /**
+   * Fields required to update the digital content metadata.
+   *
+   * Added in Saleor 3.8.
+   */
+  metadata?: InputMaybe<Array<MetadataInput>>;
+  /**
+   * Fields required to update the digital content private metadata.
+   *
+   * Added in Saleor 3.8.
+   */
+  privateMetadata?: InputMaybe<Array<MetadataInput>>;
   /** Determines for how many days a download link is active since it was generated. */
   urlValidDays?: InputMaybe<Scalars["Int"]>;
   /** Use default digital content settings for this product. */
@@ -4665,6 +4658,18 @@ export type DigitalContentUploadInput = {
   contentFile: Scalars["Upload"];
   /** Determines how many times a download link can be accessed by a customer. */
   maxDownloads?: InputMaybe<Scalars["Int"]>;
+  /**
+   * Fields required to update the digital content metadata.
+   *
+   * Added in Saleor 3.8.
+   */
+  metadata?: InputMaybe<Array<MetadataInput>>;
+  /**
+   * Fields required to update the digital content private metadata.
+   *
+   * Added in Saleor 3.8.
+   */
+  privateMetadata?: InputMaybe<Array<MetadataInput>>;
   /** Determines for how many days a download link is active since it was generated. */
   urlValidDays?: InputMaybe<Scalars["Int"]>;
   /** Use default digital content settings for this product. */
@@ -7557,6 +7562,14 @@ export type Manifest = {
   about?: Maybe<Scalars["String"]>;
   appUrl?: Maybe<Scalars["String"]>;
   /**
+   * The audience that will be included in all JWT tokens for the app.
+   *
+   * Added in Saleor 3.8.
+   *
+   * Note: this API is currently in Feature Preview and can be subject to changes at later point.
+   */
+  audience?: Maybe<Scalars["String"]>;
+  /**
    * URL to iframe with the configuration for the app.
    * @deprecated This field will be removed in Saleor 4.0. Use `appUrl` instead.
    */
@@ -7850,7 +7863,6 @@ export type MenuFilterInput = {
   metadata?: InputMaybe<Array<MetadataFilter>>;
   search?: InputMaybe<Scalars["String"]>;
   slug?: InputMaybe<Array<Scalars["String"]>>;
-  slugs?: InputMaybe<Array<Scalars["String"]>>;
 };
 
 export type MenuInput = {
@@ -9780,16 +9792,6 @@ export type Mutation = {
    * Requires one of the following permissions: MANAGE_STAFF.
    */
   staffUpdate?: Maybe<StaffUpdate>;
-  /**
-   * Exempt checkout or order from charging the taxes. When tax exemption is enabled, taxes won't be charged for the checkout or order. Taxes may still be calculated in cases when product prices are entered with the tax included and the net price needs to be known.
-   *
-   * Added in Saleor 3.8.
-   *
-   * Note: this API is currently in Feature Preview and can be subject to changes at later point.
-   *
-   * Requires one of the following permissions: MANAGE_TAXES.
-   */
-  taxExemptionManage?: Maybe<TaxExemptionManage>;
   /** Create JWT token. */
   tokenCreate?: Maybe<CreateToken>;
   /** Refresh JWT token. Mutation tries to take refreshToken from the input.If it fails it will try to take refreshToken from the http-only cookie -refreshToken. csrfToken is required when refreshToken is provided as a cookie. */
@@ -10179,7 +10181,6 @@ export type MutationCheckoutBillingAddressUpdateArgs = {
 export type MutationCheckoutCompleteArgs = {
   checkoutId?: InputMaybe<Scalars["ID"]>;
   id?: InputMaybe<Scalars["ID"]>;
-  metadata?: InputMaybe<Array<MetadataInput>>;
   paymentData?: InputMaybe<Scalars["JSONString"]>;
   redirectUrl?: InputMaybe<Scalars["String"]>;
   storeSource?: InputMaybe<Scalars["Boolean"]>;
@@ -10604,8 +10605,6 @@ export type MutationOrderConfirmArgs = {
 
 export type MutationOrderCreateFromCheckoutArgs = {
   id: Scalars["ID"];
-  metadata?: InputMaybe<Array<MetadataInput>>;
-  privateMetadata?: InputMaybe<Array<MetadataInput>>;
   removeCheckout?: InputMaybe<Scalars["Boolean"]>;
 };
 
@@ -10919,12 +10918,14 @@ export type MutationProductVariantBulkCreateArgs = {
 };
 
 export type MutationProductVariantBulkDeleteArgs = {
-  ids: Array<Scalars["ID"]>;
+  ids?: InputMaybe<Array<Scalars["ID"]>>;
+  skus?: InputMaybe<Array<Scalars["String"]>>;
 };
 
 export type MutationProductVariantChannelListingUpdateArgs = {
-  id: Scalars["ID"];
+  id?: InputMaybe<Scalars["ID"]>;
   input: Array<ProductVariantChannelListingAddInput>;
+  sku?: InputMaybe<Scalars["String"]>;
 };
 
 export type MutationProductVariantCreateArgs = {
@@ -10932,7 +10933,8 @@ export type MutationProductVariantCreateArgs = {
 };
 
 export type MutationProductVariantDeleteArgs = {
-  id: Scalars["ID"];
+  id?: InputMaybe<Scalars["ID"]>;
+  sku?: InputMaybe<Scalars["String"]>;
 };
 
 export type MutationProductVariantPreorderDeactivateArgs = {
@@ -10961,13 +10963,15 @@ export type MutationProductVariantStocksCreateArgs = {
 };
 
 export type MutationProductVariantStocksDeleteArgs = {
-  variantId: Scalars["ID"];
+  sku?: InputMaybe<Scalars["String"]>;
+  variantId?: InputMaybe<Scalars["ID"]>;
   warehouseIds?: InputMaybe<Array<Scalars["ID"]>>;
 };
 
 export type MutationProductVariantStocksUpdateArgs = {
+  sku?: InputMaybe<Scalars["String"]>;
   stocks: Array<StockInput>;
-  variantId: Scalars["ID"];
+  variantId?: InputMaybe<Scalars["ID"]>;
 };
 
 export type MutationProductVariantTranslateArgs = {
@@ -10977,8 +10981,9 @@ export type MutationProductVariantTranslateArgs = {
 };
 
 export type MutationProductVariantUpdateArgs = {
-  id: Scalars["ID"];
+  id?: InputMaybe<Scalars["ID"]>;
   input: ProductVariantInput;
+  sku?: InputMaybe<Scalars["String"]>;
 };
 
 export type MutationRequestEmailChangeArgs = {
@@ -11140,12 +11145,8 @@ export type MutationStaffUpdateArgs = {
   input: StaffUpdateInput;
 };
 
-export type MutationTaxExemptionManageArgs = {
-  id: Scalars["ID"];
-  taxExemption: Scalars["Boolean"];
-};
-
 export type MutationTokenCreateArgs = {
+  audience?: InputMaybe<Scalars["String"]>;
   email: Scalars["String"];
   password: Scalars["String"];
 };
@@ -11386,7 +11387,7 @@ export type Order = Node &
     created: Scalars["DateTime"];
     customerNote: Scalars["String"];
     /**
-     * The delivery method selected for this order.
+     * The delivery method selected for this checkout.
      *
      * Added in Saleor 3.1.
      *
@@ -11502,14 +11503,6 @@ export type Order = Node &
     statusDisplay: Scalars["String"];
     /** The sum of line prices not including shipping. */
     subtotal: TaxedMoney;
-    /**
-     * Returns True if order has to be exempt from taxes.
-     *
-     * Added in Saleor 3.8.
-     *
-     * Note: this API is currently in Feature Preview and can be subject to changes at later point.
-     */
-    taxExemption: Scalars["Boolean"];
     /** @deprecated This field will be removed in Saleor 4.0. Use `id` instead. */
     token: Scalars["String"];
     /** Total amount of the order. */
@@ -13026,7 +13019,6 @@ export type PageFilterInput = {
   metadata?: InputMaybe<Array<MetadataFilter>>;
   pageTypes?: InputMaybe<Array<Scalars["ID"]>>;
   search?: InputMaybe<Scalars["String"]>;
-  slugs?: InputMaybe<Array<Scalars["String"]>>;
 };
 
 /** The Relay compliant `PageInfo` type, containing data necessary to paginate this connection. */
@@ -13400,7 +13392,6 @@ export type PageTypeDeleted = Event & {
 
 export type PageTypeFilterInput = {
   search?: InputMaybe<Scalars["String"]>;
-  slugs?: InputMaybe<Array<Scalars["String"]>>;
 };
 
 /**
@@ -13796,12 +13787,6 @@ export type PaymentErrorCode =
 
 export type PaymentFilterInput = {
   checkouts?: InputMaybe<Array<Scalars["ID"]>>;
-  /**
-   * Filter by ids.
-   *
-   * Added in Saleor 3.8.
-   */
-  ids?: InputMaybe<Array<Scalars["ID"]>>;
 };
 
 /** Available payment gateway backend with configuration necessary to setup client. */
@@ -14022,7 +14007,6 @@ export type PermissionEnum =
   | "MANAGE_SETTINGS"
   | "MANAGE_SHIPPING"
   | "MANAGE_STAFF"
-  | "MANAGE_TAXES"
   | "MANAGE_TRANSLATIONS"
   | "MANAGE_USERS";
 
@@ -14771,8 +14755,20 @@ export type ProductCreateInput = {
    * Rich text format. For reference see https://editorjs.io/
    */
   description?: InputMaybe<Scalars["JSONString"]>;
+  /**
+   * Fields required to update the product metadata.
+   *
+   * Added in Saleor 3.8.
+   */
+  metadata?: InputMaybe<Array<MetadataInput>>;
   /** Product name. */
   name?: InputMaybe<Scalars["String"]>;
+  /**
+   * Fields required to update the product private metadata.
+   *
+   * Added in Saleor 3.8.
+   */
+  privateMetadata?: InputMaybe<Array<MetadataInput>>;
   /** ID of the type that product belongs to. */
   productType: Scalars["ID"];
   /** Defines the product rating value. */
@@ -14920,6 +14916,12 @@ export type ProductFieldEnum =
 
 export type ProductFilterInput = {
   attributes?: InputMaybe<Array<AttributeInput>>;
+  /**
+   * Filter by the date of availability for purchase.
+   *
+   * Added in Saleor 3.8.
+   */
+  availableFrom?: InputMaybe<Scalars["DateTime"]>;
   categories?: InputMaybe<Array<Scalars["ID"]>>;
   /**
    * Specifies the channel by which the data should be filtered.
@@ -14933,14 +14935,31 @@ export type ProductFilterInput = {
   hasCategory?: InputMaybe<Scalars["Boolean"]>;
   hasPreorderedVariants?: InputMaybe<Scalars["Boolean"]>;
   ids?: InputMaybe<Array<Scalars["ID"]>>;
+  /**
+   * Filter by availability for purchase.
+   *
+   * Added in Saleor 3.8.
+   */
+  isAvailable?: InputMaybe<Scalars["Boolean"]>;
   isPublished?: InputMaybe<Scalars["Boolean"]>;
+  /**
+   * Filter by visibility in product listings.
+   *
+   * Added in Saleor 3.8.
+   */
+  isVisibleInListing?: InputMaybe<Scalars["Boolean"]>;
   metadata?: InputMaybe<Array<MetadataFilter>>;
   /** Filter by the lowest variant price after discounts. */
   minimalPrice?: InputMaybe<PriceRangeInput>;
   price?: InputMaybe<PriceRangeInput>;
   productTypes?: InputMaybe<Array<Scalars["ID"]>>;
+  /**
+   * Filter by the publication date.
+   *
+   * Added in Saleor 3.8.
+   */
+  publishedFrom?: InputMaybe<Scalars["DateTime"]>;
   search?: InputMaybe<Scalars["String"]>;
-  slugs?: InputMaybe<Array<Scalars["String"]>>;
   /** Filter by variants having specific stock status. */
   stockAvailability?: InputMaybe<StockAvailability>;
   stocks?: InputMaybe<ProductStockFilterInput>;
@@ -14981,8 +15000,20 @@ export type ProductInput = {
    * Rich text format. For reference see https://editorjs.io/
    */
   description?: InputMaybe<Scalars["JSONString"]>;
+  /**
+   * Fields required to update the product metadata.
+   *
+   * Added in Saleor 3.8.
+   */
+  metadata?: InputMaybe<Array<MetadataInput>>;
   /** Product name. */
   name?: InputMaybe<Scalars["String"]>;
+  /**
+   * Fields required to update the product private metadata.
+   *
+   * Added in Saleor 3.8.
+   */
+  privateMetadata?: InputMaybe<Array<MetadataInput>>;
   /** Defines the product rating value. */
   rating?: InputMaybe<Scalars["Float"]>;
   /** Search engine optimization fields. */
@@ -15126,6 +15157,12 @@ export type ProductOrderField =
    * This option requires a channel filter to work as the values can vary between channels.
    */
   | "COLLECTION"
+  /**
+   * Sort products by creation date.
+   *
+   * Added in Saleor 3.8.
+   */
+  | "CREATED_AT"
   /** Sort products by update date. */
   | "DATE"
   /** Sort products by update date. */
@@ -15474,7 +15511,6 @@ export type ProductTypeFilterInput = {
   metadata?: InputMaybe<Array<MetadataFilter>>;
   productType?: InputMaybe<ProductTypeEnum>;
   search?: InputMaybe<Scalars["String"]>;
-  slugs?: InputMaybe<Array<Scalars["String"]>>;
 };
 
 export type ProductTypeInput = {
@@ -15811,6 +15847,12 @@ export type ProductVariantBulkCreateInput = {
   attributes: Array<BulkAttributeValueInput>;
   /** List of prices assigned to channels. */
   channelListings?: InputMaybe<Array<ProductVariantChannelListingAddInput>>;
+  /**
+   * Fields required to update the product variant metadata.
+   *
+   * Added in Saleor 3.8.
+   */
+  metadata?: InputMaybe<Array<MetadataInput>>;
   /** Variant name. */
   name?: InputMaybe<Scalars["String"]>;
   /**
@@ -15821,6 +15863,12 @@ export type ProductVariantBulkCreateInput = {
    * Note: this API is currently in Feature Preview and can be subject to changes at later point.
    */
   preorder?: InputMaybe<PreorderSettingsInput>;
+  /**
+   * Fields required to update the product variant private metadata.
+   *
+   * Added in Saleor 3.8.
+   */
+  privateMetadata?: InputMaybe<Array<MetadataInput>>;
   /**
    * Determines maximum quantity of `ProductVariant`,that can be bought in a single checkout.
    *
@@ -15941,6 +15989,12 @@ export type ProductVariantCreate = {
 export type ProductVariantCreateInput = {
   /** List of attributes specific to this variant. */
   attributes: Array<AttributeValueInput>;
+  /**
+   * Fields required to update the product variant metadata.
+   *
+   * Added in Saleor 3.8.
+   */
+  metadata?: InputMaybe<Array<MetadataInput>>;
   /** Variant name. */
   name?: InputMaybe<Scalars["String"]>;
   /**
@@ -15951,6 +16005,12 @@ export type ProductVariantCreateInput = {
    * Note: this API is currently in Feature Preview and can be subject to changes at later point.
    */
   preorder?: InputMaybe<PreorderSettingsInput>;
+  /**
+   * Fields required to update the product variant private metadata.
+   *
+   * Added in Saleor 3.8.
+   */
+  privateMetadata?: InputMaybe<Array<MetadataInput>>;
   /** Product ID of which type is the variant. */
   product: Scalars["ID"];
   /**
@@ -16059,6 +16119,12 @@ export type ProductVariantFilterInput = {
 export type ProductVariantInput = {
   /** List of attributes specific to this variant. */
   attributes?: InputMaybe<Array<AttributeValueInput>>;
+  /**
+   * Fields required to update the product variant metadata.
+   *
+   * Added in Saleor 3.8.
+   */
+  metadata?: InputMaybe<Array<MetadataInput>>;
   /** Variant name. */
   name?: InputMaybe<Scalars["String"]>;
   /**
@@ -16069,6 +16135,12 @@ export type ProductVariantInput = {
    * Note: this API is currently in Feature Preview and can be subject to changes at later point.
    */
   preorder?: InputMaybe<PreorderSettingsInput>;
+  /**
+   * Fields required to update the product variant private metadata.
+   *
+   * Added in Saleor 3.8.
+   */
+  privateMetadata?: InputMaybe<Array<MetadataInput>>;
   /**
    * Determines maximum quantity of `ProductVariant`,that can be bought in a single checkout.
    *
@@ -19424,42 +19496,6 @@ export type Subscription = {
   event?: Maybe<Event>;
 };
 
-/**
- * Exempt checkout or order from charging the taxes. When tax exemption is enabled, taxes won't be charged for the checkout or order. Taxes may still be calculated in cases when product prices are entered with the tax included and the net price needs to be known.
- *
- * Added in Saleor 3.8.
- *
- * Note: this API is currently in Feature Preview and can be subject to changes at later point.
- *
- * Requires one of the following permissions: MANAGE_TAXES.
- */
-export type TaxExemptionManage = {
-  __typename?: "TaxExemptionManage";
-  errors: Array<TaxExemptionManageError>;
-  taxableObject?: Maybe<TaxSourceObject>;
-};
-
-export type TaxExemptionManageError = {
-  __typename?: "TaxExemptionManageError";
-  /** The error code. */
-  code: TaxExemptionManageErrorCode;
-  /** Name of a field that caused the error. A value of `null` indicates that the error isn't associated with a particular field. */
-  field?: Maybe<Scalars["String"]>;
-  /** The error message. */
-  message?: Maybe<Scalars["String"]>;
-};
-
-/** An enumeration. */
-export type TaxExemptionManageErrorCode =
-  | "GRAPHQL_ERROR"
-  | "INVALID"
-  | "NOT_EDITABLE_ORDER"
-  | "NOT_FOUND";
-
-export type TaxSourceLine = CheckoutLine | OrderLine;
-
-export type TaxSourceObject = Checkout | Order;
-
 /** Representation of tax types fetched from tax gateway. */
 export type TaxType = {
   __typename?: "TaxType";
@@ -19467,55 +19503,6 @@ export type TaxType = {
   description?: Maybe<Scalars["String"]>;
   /** External tax code used to identify given tax group. */
   taxCode?: Maybe<Scalars["String"]>;
-};
-
-/** Taxable object. */
-export type TaxableObject = {
-  __typename?: "TaxableObject";
-  /** The address data. */
-  address?: Maybe<Address>;
-  channel: Channel;
-  /** The currency of the object. */
-  currency: Scalars["String"];
-  /** List of discounts. */
-  discounts: Array<TaxableObjectDiscount>;
-  /** List of lines assigned to the object. */
-  lines: Array<TaxableObjectLine>;
-  /** Determines if prices contain entered tax.. */
-  pricesEnteredWithTax: Scalars["Boolean"];
-  /** The price of shipping method. */
-  shippingPrice: Money;
-  /** The source object related to this tax object. */
-  sourceObject: TaxSourceObject;
-};
-
-/** Taxable object discount. */
-export type TaxableObjectDiscount = {
-  __typename?: "TaxableObjectDiscount";
-  /** The amount of the discount. */
-  amount: Money;
-  /** The name of the discount. */
-  name?: Maybe<Scalars["String"]>;
-};
-
-export type TaxableObjectLine = {
-  __typename?: "TaxableObjectLine";
-  /** Determines if taxes are being charged for the product. */
-  chargeTaxes: Scalars["Boolean"];
-  /** The product name. */
-  productName: Scalars["String"];
-  /** The product sku. */
-  productSku?: Maybe<Scalars["String"]>;
-  /** Number of items. */
-  quantity: Scalars["Int"];
-  /** The source line related to this tax line. */
-  sourceLine: TaxSourceLine;
-  /** Price of the order line. */
-  totalPrice: Money;
-  /** Price of the single item in the order line. */
-  unitPrice: Money;
-  /** The variant name. */
-  variantName: Scalars["String"];
 };
 
 /** Represents a monetary value with taxes. In cases where taxes were not applied, net and gross values will be equal. */
@@ -20113,6 +20100,12 @@ export type User = Node &
      * @deprecated This field will be removed in Saleor 4.0. Use `checkoutIds` instead.
      */
     checkoutTokens?: Maybe<Array<Scalars["UUID"]>>;
+    /**
+     * Returns checkouts assigned to this user.
+     *
+     * Added in Saleor 3.8.
+     */
+    checkouts?: Maybe<CheckoutCountableConnection>;
     dateJoined: Scalars["DateTime"];
     defaultBillingAddress?: Maybe<Address>;
     defaultShippingAddress?: Maybe<Address>;
@@ -20206,6 +20199,15 @@ export type UserCheckoutIdsArgs = {
 /** Represents user data. */
 export type UserCheckoutTokensArgs = {
   channel?: InputMaybe<Scalars["String"]>;
+};
+
+/** Represents user data. */
+export type UserCheckoutsArgs = {
+  after?: InputMaybe<Scalars["String"]>;
+  before?: InputMaybe<Scalars["String"]>;
+  channel?: InputMaybe<Scalars["String"]>;
+  first?: InputMaybe<Scalars["Int"]>;
+  last?: InputMaybe<Scalars["Int"]>;
 };
 
 /** Represents user data. */
@@ -21200,7 +21202,6 @@ export type WarehouseFilterInput = {
   ids?: InputMaybe<Array<Scalars["ID"]>>;
   isPrivate?: InputMaybe<Scalars["Boolean"]>;
   search?: InputMaybe<Scalars["String"]>;
-  slugs?: InputMaybe<Array<Scalars["String"]>>;
 };
 
 /**
@@ -22131,7 +22132,7 @@ export type CheckoutFragment = {
     id: string;
     currentBalance: { __typename?: "Money"; currency: string; amount: number };
   }>;
-  channel: { __typename?: "Channel"; id: string };
+  channel: { __typename?: "Channel"; id: string; slug: string };
   shippingAddress?: {
     __typename?: "Address";
     id: string;
@@ -22334,7 +22335,7 @@ export type CheckoutQuery = {
       id: string;
       currentBalance: { __typename?: "Money"; currency: string; amount: number };
     }>;
-    channel: { __typename?: "Channel"; id: string };
+    channel: { __typename?: "Channel"; id: string; slug: string };
     shippingAddress?: {
       __typename?: "Address";
       id: string;
@@ -22545,7 +22546,7 @@ export type CheckoutLinesUpdateMutation = {
         id: string;
         currentBalance: { __typename?: "Money"; currency: string; amount: number };
       }>;
-      channel: { __typename?: "Channel"; id: string };
+      channel: { __typename?: "Channel"; id: string; slug: string };
       shippingAddress?: {
         __typename?: "Address";
         id: string;
@@ -22690,7 +22691,7 @@ export type CheckoutLineDeleteMutation = {
         id: string;
         currentBalance: { __typename?: "Money"; currency: string; amount: number };
       }>;
-      channel: { __typename?: "Channel"; id: string };
+      channel: { __typename?: "Channel"; id: string; slug: string };
       shippingAddress?: {
         __typename?: "Address";
         id: string;
@@ -22835,7 +22836,7 @@ export type CheckoutEmailUpdateMutation = {
         id: string;
         currentBalance: { __typename?: "Money"; currency: string; amount: number };
       }>;
-      channel: { __typename?: "Channel"; id: string };
+      channel: { __typename?: "Channel"; id: string; slug: string };
       shippingAddress?: {
         __typename?: "Address";
         id: string;
@@ -22979,7 +22980,7 @@ export type CheckoutCustomerAttachMutation = {
         id: string;
         currentBalance: { __typename?: "Money"; currency: string; amount: number };
       }>;
-      channel: { __typename?: "Channel"; id: string };
+      channel: { __typename?: "Channel"; id: string; slug: string };
       shippingAddress?: {
         __typename?: "Address";
         id: string;
@@ -23123,7 +23124,7 @@ export type CheckoutCustomerDetachMutation = {
         id: string;
         currentBalance: { __typename?: "Money"; currency: string; amount: number };
       }>;
-      channel: { __typename?: "Channel"; id: string };
+      channel: { __typename?: "Channel"; id: string; slug: string };
       shippingAddress?: {
         __typename?: "Address";
         id: string;
@@ -23367,7 +23368,7 @@ export type CheckoutShippingAddressUpdateMutation = {
         id: string;
         currentBalance: { __typename?: "Money"; currency: string; amount: number };
       }>;
-      channel: { __typename?: "Channel"; id: string };
+      channel: { __typename?: "Channel"; id: string; slug: string };
       shippingAddress?: {
         __typename?: "Address";
         id: string;
@@ -23513,7 +23514,7 @@ export type CheckoutBillingAddressUpdateMutation = {
         id: string;
         currentBalance: { __typename?: "Money"; currency: string; amount: number };
       }>;
-      channel: { __typename?: "Channel"; id: string };
+      channel: { __typename?: "Channel"; id: string; slug: string };
       shippingAddress?: {
         __typename?: "Address";
         id: string;
@@ -23658,7 +23659,7 @@ export type CheckoutDeliveryMethodUpdateMutation = {
         id: string;
         currentBalance: { __typename?: "Money"; currency: string; amount: number };
       }>;
-      channel: { __typename?: "Channel"; id: string };
+      channel: { __typename?: "Channel"; id: string; slug: string };
       shippingAddress?: {
         __typename?: "Address";
         id: string;
@@ -23825,7 +23826,7 @@ export type CheckoutAddPromoCodeMutation = {
         id: string;
         currentBalance: { __typename?: "Money"; currency: string; amount: number };
       }>;
-      channel: { __typename?: "Channel"; id: string };
+      channel: { __typename?: "Channel"; id: string; slug: string };
       shippingAddress?: {
         __typename?: "Address";
         id: string;
@@ -23971,7 +23972,7 @@ export type CheckoutRemovePromoCodeMutation = {
         id: string;
         currentBalance: { __typename?: "Money"; currency: string; amount: number };
       }>;
-      channel: { __typename?: "Channel"; id: string };
+      channel: { __typename?: "Channel"; id: string; slug: string };
       shippingAddress?: {
         __typename?: "Address";
         id: string;
@@ -24479,6 +24480,7 @@ export const CheckoutFragmentDoc = gql`
     }
     channel {
       id
+      slug
     }
     shippingAddress {
       ...AddressFragment

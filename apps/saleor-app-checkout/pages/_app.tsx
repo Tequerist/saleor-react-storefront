@@ -3,11 +3,9 @@ import Head from "next/head";
 import { AppProps } from "next/app";
 import { ThemeProvider } from "@saleor/macaw-ui";
 import { IntlProvider } from "react-intl";
-import { Provider as ClientProvider } from "urql";
 import { useFormattedMessages } from "@/saleor-app-checkout/frontend/hooks/useFormattedMessages";
 import AppContainer from "@/saleor-app-checkout/frontend/components/elements/AppContainer";
 import AppProvider from "@/saleor-app-checkout/frontend/components/elements/AppProvider";
-import { client } from "@/saleor-app-checkout/frontend/misc/client";
 import PrivateSettingsProvider from "@/saleor-app-checkout/frontend/components/elements/PrivateSettingsProvider";
 import "@saleor/checkout-storefront/dist/esm/index.css";
 import { useEffect } from "react";
@@ -23,8 +21,9 @@ export default function App(props: AppProps) {
   const { locale, messages } = useFormattedMessages();
 
   const version = [
-    process.env.NEXT_PUBLIC_SENTRY_ENVIRONMENT || "",
-    process.env.NEXT_PUBLIC_SENTRY_RELEASE || "",
+    process.env.NEXT_PUBLIC_SENTRY_ENVIRONMENT || "(unknown_env)",
+    process.env.NEXT_PUBLIC_GIT_BRANCH || "(unknown_branch)",
+    process.env.NEXT_PUBLIC_SENTRY_RELEASE || "(unknown_release)",
   ].join("-");
 
   useEffect(() => {
@@ -57,34 +56,32 @@ export default function App(props: AppProps) {
         </style>
       </Head>
       <AppProvider>
-        <ClientProvider value={client}>
-          <PrivateSettingsProvider>
-            <IntlProvider
-              locale={locale}
-              messages={messages}
-              onError={() => null} // Hide missing translation warnings
-            >
-              {/* @ts-expect-error React 17 <-> 18 types mismatch */}
-              <ThemeProvider ssr={true}>
-                <AppContainer>
-                  <Component {...pageProps} />
-                </AppContainer>
-                <footer
-                  style={{
-                    fontSize: "0.8em",
-                    textAlign: "center",
-                    color: "#777",
-                    transform: "translateY(-100%)",
-                    height: "1.7rem",
-                    marginTop: "-1.7rem",
-                  }}
-                >
-                  <small>{version}</small>
-                </footer>
-              </ThemeProvider>
-            </IntlProvider>
-          </PrivateSettingsProvider>
-        </ClientProvider>
+        <PrivateSettingsProvider>
+          <IntlProvider
+            locale={locale}
+            messages={messages}
+            onError={() => null} // Hide missing translation warnings
+          >
+            {/* @ts-expect-error React 17 <-> 18 types mismatch */}
+            <ThemeProvider ssr={true}>
+              <AppContainer>
+                <Component {...pageProps} />
+              </AppContainer>
+              <footer
+                style={{
+                  fontSize: "0.8em",
+                  textAlign: "center",
+                  color: "#777",
+                  transform: "translateY(-100%)",
+                  height: "1.7rem",
+                  marginTop: "-1.7rem",
+                }}
+              >
+                <small>{version}</small>
+              </footer>
+            </ThemeProvider>
+          </IntlProvider>
+        </PrivateSettingsProvider>
       </AppProvider>
     </>
   );

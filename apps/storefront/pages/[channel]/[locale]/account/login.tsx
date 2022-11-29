@@ -129,8 +129,8 @@ function LoginPage() {
               </div>
             </form>
             <p className="mt-8 text-[14px] underline text-center">
-              <Link href={paths.account.register.$url()} passHref>
-                <a href="pass">{t.formatMessage(messages.createAccount)}</a>
+              <Link href={paths.account.register.$url()}>
+                {t.formatMessage(messages.createAccount)}
               </Link>
             </p>
           </div>

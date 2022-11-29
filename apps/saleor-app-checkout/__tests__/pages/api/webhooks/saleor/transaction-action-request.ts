@@ -1,4 +1,3 @@
-import { getSaleorDomain } from "@/saleor-app-checkout/backend/utils";
 import { transactionActionRequest } from "@/saleor-app-checkout/mocks/fixtures/saleor";
 import endpoint, {
   config,
@@ -14,7 +13,7 @@ import { updateTransactionProcessedEvents } from "@/saleor-app-checkout/backend/
 import { disableConsole } from "@/saleor-app-checkout/test-utils";
 
 const handler: typeof endpoint & { config?: PageConfig } = endpoint;
-handler.config = config;
+handler.config = config as PageConfig;
 
 jest.mock("@saleor/app-sdk/middleware", () => ({
   __esModule: true,
@@ -37,10 +36,10 @@ const mockedGetTransactionProcessedEvents = getTransactionProcessedEvents as jes
 
 const REQUEST_SIGNATURE = "valid_signature";
 
-const getReqHeaders = async (): Promise<HeadersInit> => {
+const getReqHeaders = async (saleorDomainHeader: string): Promise<HeadersInit> => {
   return {
     "Content-Type": "application/json",
-    [SALEOR_DOMAIN_HEADER]: await getSaleorDomain(),
+    [SALEOR_DOMAIN_HEADER]: saleorDomainHeader,
     "saleor-signature": REQUEST_SIGNATURE,
     "saleor-event": "transaction_action_request",
   };
@@ -52,11 +51,14 @@ describe("Saleor TRANSACTION_ACTION_REQUEST webhook handler", () => {
 
     await testApiHandler({
       handler,
+      params: {
+        saleorApiUrl: "https://saleor-api-host.saleor.localhost:8000/graphql/",
+      },
       test: async ({ fetch }) => {
         const res = await fetch({
           method: "POST",
           body: JSON.stringify(transactionActionRequest.missingData),
-          headers: await getReqHeaders(),
+          headers: await getReqHeaders("saleor-api-host.saleor.localhost:8000"),
         });
 
         expect(res.status).toBe(Response.BadRequest().status);
@@ -73,11 +75,12 @@ describe("Saleor TRANSACTION_ACTION_REQUEST webhook handler", () => {
 
     await testApiHandler({
       handler,
+      url: "?saleorApiUrl=https://saleor-api-host.saleor.localhost:8000/graphql/",
       test: async ({ fetch }) => {
         const res = await fetch({
           method: "POST",
           body: JSON.stringify(transactionActionRequest.adyenRefund),
-          headers: await getReqHeaders(),
+          headers: await getReqHeaders("saleor-api-host.saleor.localhost:8000"),
         });
 
         expect(res.status).toBe(200);
@@ -101,7 +104,7 @@ describe("Saleor TRANSACTION_ACTION_REQUEST webhook handler", () => {
           const res = await fetch({
             method: "POST",
             body: JSON.stringify(transactionActionRequest.mollieRefund),
-            headers: await getReqHeaders(),
+            headers: await getReqHeaders("saleor-api-host.saleor.localhost:8000"),
           });
 
           expect(res.status).toBe(200);
@@ -124,7 +127,7 @@ describe("Saleor TRANSACTION_ACTION_REQUEST webhook handler", () => {
           const res = await fetch({
             method: "POST",
             body: JSON.stringify(transactionActionRequest.adyenRefund),
-            headers: await getReqHeaders(),
+            headers: await getReqHeaders("saleor-api-host.saleor.localhost:8000"),
           });
 
           expect(res.status).toBe(200);

@@ -73,10 +73,11 @@ export const Summary: FC<SummaryProps> = ({
         ? window.innerHeight - PAGE_MARGINS_HEIGHT - recapHeight
         : lines.length * LINE_HEIGHT;
 
-      setMaxSummaryHeight(maxHeight);
+      // always set at least one line item height
+      setMaxSummaryHeight(Math.max(LINE_HEIGHT, maxHeight));
     };
 
-    window.addEventListener("resize", handleWindowResize);
+    window.addEventListener("resize", handleWindowResize, { passive: true });
     handleWindowResize();
 
     return () => window.removeEventListener("resize", handleWindowResize);
@@ -173,6 +174,7 @@ export const Summary: FC<SummaryProps> = ({
               ariaLabel={formatMessage(summaryLabels.totalPrice)}
               weight="bold"
               money={totalPrice?.gross}
+              data-testid="totalOrderPrice"
             />
           </div>
         </div>

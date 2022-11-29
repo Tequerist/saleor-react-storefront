@@ -16,7 +16,7 @@ import { Checkbox } from "@/checkout-storefront/components/Checkbox";
 import { TextInput } from "@/checkout-storefront/components/TextInput";
 import { useCheckout } from "@/checkout-storefront/hooks/useCheckout";
 import { useAlerts } from "@/checkout-storefront/hooks/useAlerts";
-import { useSetFormErrors } from "@/checkout-storefront/hooks/useSetFormErrors";
+import { useSetFormErrors } from "@/checkout-storefront/hooks/useSetFormErrors/useSetFormErrors";
 import { useCheckoutFormValidationTrigger } from "@/checkout-storefront/hooks/useCheckoutFormValidationTrigger";
 import { useCheckoutUpdateStateTrigger } from "@/checkout-storefront/hooks";
 import { useFormDebouncedSubmit } from "@/checkout-storefront/hooks/useFormDebouncedSubmit";
@@ -132,6 +132,7 @@ export const GuestUserForm: React.FC<AnonymousCustomerFormProps> = ({ onSectionC
           label={formatMessage(contactMessages.wantToCreateAccount)}
           checked={createAccountSelected}
           onChange={setCreateAccountSelected}
+          data-testid={"createAccountCheckbox"}
         />
         {createAccountSelected && (
           <div className="mt-2">

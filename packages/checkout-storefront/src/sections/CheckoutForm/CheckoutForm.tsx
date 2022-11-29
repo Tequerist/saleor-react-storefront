@@ -14,16 +14,15 @@ import { AddressSectionSkeleton } from "@/checkout-storefront/sections/ShippingA
 import { useCheckoutForm } from "@/checkout-storefront/sections/CheckoutForm/useCheckoutForm";
 import { commonMessages } from "@/checkout-storefront/lib/commonMessages";
 import { checkoutFormLabels, checkoutFormMessages } from "./messages";
-import { getQueryParams } from "@/checkout-storefront/lib/utils";
+import { getQueryParams } from "@/checkout-storefront/lib/utils/url";
 
 export const CheckoutForm = () => {
   const formatMessage = useFormattedMessages();
   const { checkout } = useCheckout();
   const { checkoutFinalize, errors: userRegisterErrors } = useCheckoutFinalize();
+  const { passwordResetToken } = getQueryParams();
 
-  const [showOnlyContact, setShowOnlyContact] = useState(
-    !!getQueryParams().passwordResetToken || false
-  );
+  const [showOnlyContact, setShowOnlyContact] = useState(!!passwordResetToken);
 
   const { handleSubmit, isProcessingApiChanges, methods } = useCheckoutForm({
     userRegisterErrors,
@@ -78,6 +77,7 @@ export const CheckoutForm = () => {
             label={formatMessage(checkoutFormMessages.pay)}
             className="pay-button"
             onClick={handleSubmit}
+            data-testid="pay-button"
           />
         ))}
     </div>

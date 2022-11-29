@@ -15,6 +15,7 @@ import NavIconButton from "./NavIconButton";
 import Stamp from "./Stamp";
 import UserMenu from "./UserMenu";
 import { useRegions } from "@/components/RegionsProvider";
+import { invariant } from "@apollo/client/utilities/globals";
 
 export function Navbar() {
   const paths = usePaths();
@@ -23,11 +24,26 @@ export function Navbar() {
   const [isBurgerOpen, setBurgerOpen] = useState(false);
   const { authenticated } = useAuthState();
   const { checkout } = useCheckout();
-  const { currentLocale } = useRegions();
+  const { currentLocale, currentChannel } = useRegions();
 
-  const externalCheckoutUrl = checkout
-    ? `/checkout/?checkout=${checkout.id}&locale=${currentLocale}`
-    : "";
+  const saleorApiUrl = process.env.NEXT_PUBLIC_API_URI;
+  invariant(saleorApiUrl, "Missing NEXT_PUBLIC_API_URI");
+  const domain = new URL(saleorApiUrl).hostname;
+
+  const checkoutParams = checkout
+    ? new URLSearchParams({
+        checkout: checkout.id,
+        locale: currentLocale,
+        channel: currentChannel.slug,
+        saleorApiUrl,
+        // @todo remove `domain`
+        // https://github.com/saleor/saleor-dashboard/issues/2387
+        // https://github.com/saleor/saleor-app-sdk/issues/87
+        domain,
+      })
+    : new URLSearchParams();
+
+  const externalCheckoutUrl = checkout ? `/checkout/?${checkoutParams.toString()}` : "#";
 
   useEffect(() => {
     // Close side menu after changing the page
@@ -49,8 +65,8 @@ export function Navbar() {
     <>
       <div className={clsx(styles.navbar)}>
         <div className={clsx(styles.inner)}>
-          <div className="flex xs:justify-center">
-            <Link href={paths.$url()} passHref>
+          <div className="flex-1 flex xs:justify-center">
+            <Link href={paths.$url()} passHref legacyBehavior>
               <a href="pass" className={styles.logo}>
                 <Stamp />
               </a>
@@ -58,22 +74,20 @@ export function Navbar() {
           </div>
           <div className="flex-1 flex justify-end">
             {!authenticated ? (
-              <Link href={paths.account.login.$url()} passHref>
-                <a href="pass">
-                  <NavIconButton icon="user" aria-hidden="true" />
+              <Link href={paths.account.login.$url()} passHref legacyBehavior>
+                <a href="pass" data-testid="userIcon">
+                  <NavIconButton isButton={false} icon="user" aria-hidden="true" />
                 </a>
               </Link>
             ) : (
               <UserMenu />
             )}
-            <Link href={externalCheckoutUrl} passHref>
-              <a href="pass" className="ml-6 hidden xs:flex">
-                <NavIconButton icon="bag" aria-hidden="true" counter={counter} />
-              </a>
-            </Link>
-            <Link href={paths.search.$url()} passHref>
-              <a href="pass" className="hidden lg:flex ml-6">
-                <NavIconButton icon="spyglass" data-testid="searchIcon" />
+            <a href={externalCheckoutUrl} className="ml-6 hidden xs:flex" data-testid="cartIcon">
+              <NavIconButton isButton={false} icon="bag" aria-hidden="true" counter={counter} />
+            </a>
+            <Link href={paths.search.$url()} passHref legacyBehavior>
+              <a href="pass" className="hidden lg:flex ml-6" data-testid="searchIcon">
+                <NavIconButton isButton={false} icon="spyglass" />
               </a>
             </Link>
             <NavIconButton

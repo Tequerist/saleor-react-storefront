@@ -8,6 +8,7 @@ import { useIntl } from "react-intl";
 import { notFoundMessages } from "@/saleor-app-checkout/frontend/misc/errorMessages";
 import { useGetPaymentProviderSettings } from "@/saleor-app-checkout/frontend/hooks/useGetPaymentProviderSettings";
 import { useSetPaymentProviderSettings } from "@/saleor-app-checkout/frontend/hooks/useSetPaymentProviderSettings";
+import { useAppContext } from "@/saleor-app-checkout/frontend/components/elements/AppProvider/ClientAppBridgeProvider";
 
 const PaymentProvider = () => {
   const router = useRouter();
@@ -20,6 +21,12 @@ const PaymentProvider = () => {
 
   const paymentProviders = usePaymentProviderSettings(getPaymentProviderSettings.data);
 
+  const { app } = useAppContext();
+  const domain = app.getState().domain;
+  // @todo use `saleorApiUrl`
+  const saleorApiUrl = `https://${domain}/graphql/`;
+  const token = app.getState().token;
+
   const paymentProvider = paymentProviders.find(
     (paymentMethod) => paymentMethod.id === paymentProviderId
   );
@@ -29,7 +36,7 @@ const PaymentProvider = () => {
   };
 
   const handleSubmit = (data: PaymentProviderSettingsValues<"unencrypted">) => {
-    void setPaymentProviderSettingsRequest(data);
+    void setPaymentProviderSettingsRequest({ ...data, saleorApiUrl, token });
   };
 
   const errors = [

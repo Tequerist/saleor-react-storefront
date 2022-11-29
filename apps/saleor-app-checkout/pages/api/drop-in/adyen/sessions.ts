@@ -1,7 +1,9 @@
+import * as Sentry from "@sentry/nextjs";
+import { getSaleorApiUrlFromRequest } from "@/saleor-app-checkout/backend/auth";
 import { createAdyenCheckoutSession } from "@/saleor-app-checkout/backend/payments/providers/adyen";
 import { allowCors, getBaseUrl } from "@/saleor-app-checkout/backend/utils";
 import { createParseAndValidateBody } from "@/saleor-app-checkout/utils";
-import { withSentry } from "@sentry/nextjs";
+import { unpackThrowable } from "@/saleor-app-checkout/utils/unpackErrors";
 import { AdyenDropInCreateSessionResponse, postDropInAdyenSessionsBody } from "checkout-common";
 import { NextApiHandler } from "next";
 
@@ -23,19 +25,27 @@ const DropInAdyenSessionsHandler: NextApiHandler<
     return;
   }
 
+  const [saleorApiUrlError, saleorApiUrl] = unpackThrowable(() => getSaleorApiUrlFromRequest(req));
+
+  if (saleorApiUrlError) {
+    res.status(400).json({ message: saleorApiUrlError.message });
+    return;
+  }
+
   try {
     const appUrl = getBaseUrl(req);
 
-    const { session, clientKey } = await createAdyenCheckoutSession({
+    const { session, clientKey } = await createAdyenCheckoutSession(saleorApiUrl, {
       ...body,
       redirectUrl: appUrl,
     });
     return res.status(200).json({ session, clientKey });
   } catch (err) {
     console.error(err);
+    Sentry.captureException(err);
 
     return res.status(500).json({ message: body.provider });
   }
 };
 
-export default withSentry(allowCors(DropInAdyenSessionsHandler));
+export default allowCors(DropInAdyenSessionsHandler);

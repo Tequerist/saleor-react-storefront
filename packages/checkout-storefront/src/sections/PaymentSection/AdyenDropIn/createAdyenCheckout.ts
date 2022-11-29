@@ -7,6 +7,7 @@ import {
   PostAdyenDropInPaymentsResponse,
 } from "checkout-common";
 import { PaymentResponse as AdyenApiPaymentResponse } from "@adyen/api-library/lib/src/typings/checkout/paymentResponse";
+import { replaceUrl } from "@/checkout-storefront/lib/utils/url";
 
 export type AdyenCheckoutInstanceOnSubmit = (
   state: {
@@ -46,6 +47,7 @@ export function createAdyenCheckoutInstance(
     },
     onSubmit,
     onAdditionalDetails,
+    allowPaymentMethods: ["scheme"],
     // Any payment method specific configuration. Find the configuration specific to each payment method: https://docs.adyen.com/payment-methods
     // For example, this is 3D Secure configuration for cards:
     paymentMethodsConfiguration: {
@@ -62,6 +64,7 @@ export function createAdyenCheckoutInstance(
 }
 
 export function handlePaymentResult(
+  saleorApiUrl: string,
   result: PostAdyenDropInPaymentsResponse | PostAdyenDropInPaymentsDetailsResponse,
   component: DropinElement
 ) {
@@ -86,7 +89,19 @@ export function handlePaymentResult(
 
     case AdyenApiPaymentResponse.ResultCodeEnum.Authorised:
     case AdyenApiPaymentResponse.ResultCodeEnum.Success: {
-      const newUrl = `?order=${result.orderId}`;
+      component.setStatus("success");
+      const domain = new URL(saleorApiUrl).hostname;
+      const newUrl = replaceUrl({
+        query: {
+          checkout: undefined,
+          order: result.orderId,
+          saleorApiUrl,
+          // @todo remove `domain`
+          // https://github.com/saleor/saleor-dashboard/issues/2387
+          // https://github.com/saleor/saleor-app-sdk/issues/87
+          domain,
+        },
+      });
       window.location.href = newUrl;
       return;
     }

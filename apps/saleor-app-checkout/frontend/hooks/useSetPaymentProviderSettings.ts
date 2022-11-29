@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { CombinedError } from "urql";
+import { useAppContext } from "../components/elements/AppProvider/ClientAppBridgeProvider";
 import { requestSetPaymentProviderSettings } from "../fetch";
 import { useFetch, UseFetchOptionalProps } from "./useFetch";
 import { usePrivateSettings } from "./usePrivateSettings";
@@ -9,9 +10,19 @@ export const useSetPaymentProviderSettings = <TArgs>(
 ) => {
   const { privateSettings, setPrivateSettings } = usePrivateSettings();
 
+  const { app } = useAppContext();
+  const domain = app.getState().domain;
+  // @todo use `saleorApiUrl`
+  const saleorApiUrl = `https://${domain}/graphql/`;
+
   const [{ data, loading, error }, request] = useFetch(requestSetPaymentProviderSettings, {
     skip: true,
     ...optionalProps,
+    args: {
+      ...optionalProps?.args,
+      saleorApiUrl,
+      token: app.getState().token,
+    },
   });
 
   useEffect(() => {
