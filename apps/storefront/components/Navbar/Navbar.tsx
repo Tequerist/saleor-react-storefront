@@ -95,6 +95,11 @@ export function Navbar() {
               className="ml-4 lg:hidden"
               onClick={() => setBurgerOpen(true)}
             />
+            <Link href={paths.wishlist.$url()} passHref legacyBehavior>
+              <a href="pass" className="hidden lg:flex ml-6" data-testid="searchIcon">
+                <NavIconButton isButton={false} icon="spyglass" />
+              </a>
+            </Link>
           </div>
         </div>
         {/* categories menu */}

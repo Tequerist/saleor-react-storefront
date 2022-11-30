@@ -12,6 +12,8 @@ import {
   ProductVariantDetailsFragment,
 } from "@/saleor/api";
 import ReactImageGallery from "react-image-gallery";
+import { MdFavoriteBorder } from "react-icons/md";
+import { IconButton } from "@saleor/ui-kit";
 
 export interface ProductGalleryProps {
   product: ProductDetailsFragment;
@@ -39,7 +41,8 @@ export function ProductGallery({ product, selectedVariant }: ProductGalleryProps
           scrollSnapType: "both mandatory",
         }}
       >
-        <div className="w-[600px] h-[400x]">
+        <div className="w-[600px]">
+          <MdFavoriteBorder size={"40px"} color="grey" />
           <ReactImageGallery items={galleryInputs} />
         </div>
         {/* {galleryMedia?.map((media: ProductMediaFragment) => {

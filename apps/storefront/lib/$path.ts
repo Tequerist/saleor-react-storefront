@@ -115,6 +115,13 @@ export const pagesPath = {
           hash: url?.hash,
         }),
       },
+      wishlist: {
+        $url: (url?: { hash?: string }) => ({
+          pathname: "/[channel]/[locale]/wishlistpage" as const,
+          query: { channel, locale },
+          hash: url?.hash,
+        }),
+      },
       $url: (url?: { hash?: string }) => ({
         pathname: "/[channel]/[locale]" as const,
         query: { channel, locale },

@@ -23,6 +23,6 @@
       "@/lib/*": ["lib/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/[channel]/[locale]/wishlistpage.tsx"],
   "exclude": ["node_modules", "cypress"]
 }
