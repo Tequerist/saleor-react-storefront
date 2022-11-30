@@ -11,6 +11,7 @@ import {
   ProductMediaFragment,
   ProductVariantDetailsFragment,
 } from "@/saleor/api";
+import ReactImageGallery from "react-image-gallery";
 
 export interface ProductGalleryProps {
   product: ProductDetailsFragment;
@@ -22,6 +23,10 @@ export function ProductGallery({ product, selectedVariant }: ProductGalleryProps
   const [videoToPlay, setVideoToPlay] = useState<ProductMediaFragment | undefined>(undefined);
 
   const galleryMedia = getGalleryMedia({ product, selectedVariant });
+  const galleryInputs = galleryMedia?.map((media: ProductMediaFragment) => ({
+    original: media.url,
+    thumbnail: media.type === "IMAGE" ? media.url : "",
+  }));
 
   return (
     <>
@@ -34,8 +39,11 @@ export function ProductGallery({ product, selectedVariant }: ProductGalleryProps
           scrollSnapType: "both mandatory",
         }}
       >
-        {galleryMedia?.map((media: ProductMediaFragment) => {
-          const videoThumbnailUrl = getVideoThumbnail(media.url);
+        <div className="w-[600px] h-[400x]">
+          <ReactImageGallery items={galleryInputs} />
+        </div>
+        {/* {galleryMedia?.map((media: ProductMediaFragment) => {
+          const videoThumbnailUrl = getVideoThumbnail(media.url); 
           return (
             <div
               key={media.url}
@@ -84,9 +92,9 @@ export function ProductGallery({ product, selectedVariant }: ProductGalleryProps
               )}
             </div>
           );
-        })}
+        })} */}
       </div>
-      {expandedImage && (
+      {/* {expandedImage && (
         <div className="absolute min-h-screen min-w-screen h-full w-full top-0 bottom-0 left-0 right-0 z-40">
           <ImageExpand image={expandedImage} onRemoveExpand={() => setExpandedImage(undefined)} />
         </div>
@@ -96,7 +104,7 @@ export function ProductGallery({ product, selectedVariant }: ProductGalleryProps
         <div className="absolute min-h-screen min-w-screen top-0 bottom-0 left-0 right-0 z-40">
           <VideoExpand video={videoToPlay} onRemoveExpand={() => setVideoToPlay(undefined)} />
         </div>
-      )}
+      )} */}
     </>
   );
 }

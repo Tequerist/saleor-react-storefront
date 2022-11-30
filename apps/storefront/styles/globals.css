@@ -28,7 +28,15 @@
   transform: translate(0) scale(1);
   visibility: visible;
 }
+.image-gallery-image {
+  transition: 0.5s;
+}
+.image-gallery-image:hover {
+  transform: scale(1.5);
+  transition: 0.5s;
+}
 
 html {
   font-size: 62.5%;
 }
+@import "~react-image-gallery/styles/css/image-gallery.css";
