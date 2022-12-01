@@ -42,7 +42,9 @@ export function ProductGallery({ product, selectedVariant }: ProductGalleryProps
         }}
       >
         <div className="w-[600px]">
-          <MdFavoriteBorder size={"40px"} color="grey" />
+          <div className="fav-icon">
+            <MdFavoriteBorder size={"40px"} color="grey" />
+          </div>
           <ReactImageGallery items={galleryInputs} />
         </div>
         {/* {galleryMedia?.map((media: ProductMediaFragment) => {

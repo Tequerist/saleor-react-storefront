@@ -186,14 +186,14 @@ function ProductPage({ product }: InferGetStaticPropsType<typeof getStaticProps>
                 legacyBehavior
               >
                 <a>
-                  <p className="text-md mt-2 font-medium text-gray-600 cursor-pointer">
+                  <p className="text-md mt-2 font-medium text-gray-400 cursor-pointer">
                     {translate(product.category, "name")}
                   </p>
                 </a>
               </Link>
             )}
             {shouldDisplayPrice && (
-              <h2 className="text-xl font-bold tracking-tight text-gray-800">
+              <h2 className="text-xl font-bold tracking-tight text-gray-800 mt-8">
                 {formatPrice(price)}
               </h2>
             )}
