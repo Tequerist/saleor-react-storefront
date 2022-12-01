@@ -2,7 +2,7 @@ import { ApolloQueryResult } from "@apollo/client";
 import { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import React, { ReactElement } from "react";
 
-import { HomepageBlock, Layout } from "@/components";
+import { Banner, HomepageBlock, Layout } from "@/components";
 import { BaseSeo } from "@/components/seo/BaseSeo";
 import { HOMEPAGE_MENU } from "@/lib/const";
 import apolloClient from "@/lib/graphql";
@@ -32,6 +32,7 @@ function Home({ menuData }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <BaseSeo />
+      <Banner />
       <div className="py-10">
         <header className="mb-4">
           <div className="container" />
@@ -42,7 +43,11 @@ function Home({ menuData }: InferGetStaticPropsType<typeof getStaticProps>) {
               if (!m) {
                 return null;
               }
-              return <HomepageBlock key={m.id} menuItem={m} />;
+              return (
+                <div>
+                  <HomepageBlock key={m.id} menuItem={m} />
+                </div>
+              );
             })}
           </div>
         </main>

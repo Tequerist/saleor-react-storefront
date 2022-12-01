@@ -19,3 +19,4 @@ export { VariantSelector } from "./product/VariantSelector";
 export { ProductCollection } from "./ProductCollection";
 export { RichText } from "./RichText";
 export { Spinner } from "./Spinner";
+export { Banner } from "./Banner";

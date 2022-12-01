@@ -48,6 +48,7 @@ export function HomepageBlock({ menuItem }: HomepageBlockProps) {
           </a>
         </Link>
       </div> */}
+
       <div className="container flex justify-between px-0 py-4">
         <h1
           className="text-3xl font-extrabold tracking-tight text-gray-900 pb-6"

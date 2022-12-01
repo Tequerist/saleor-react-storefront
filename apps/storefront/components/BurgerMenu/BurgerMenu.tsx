@@ -55,6 +55,7 @@ export function BurgerMenu({ open, onCloseClick }: BurgerMenuProps) {
         {menu.map((item) => (
           <CollapseMenu menuItem={item} key={item.id} />
         ))}
+        <h1>home</h1>
         <div className="mt-auto pt-4">
           <div className="flex flex-col">
             {authenticated ? (
