@@ -45,7 +45,7 @@ export function ProductGallery({ product, selectedVariant }: ProductGalleryProps
           <div className="fav-icon">
             <MdFavoriteBorder size={"40px"} color="grey" />
           </div>
-          <ReactImageGallery items={galleryInputs} />
+          <ReactImageGallery items={galleryInputs} showPlayButton={false} />
         </div>
         {/* {galleryMedia?.map((media: ProductMediaFragment) => {
           const videoThumbnailUrl = getVideoThumbnail(media.url); 

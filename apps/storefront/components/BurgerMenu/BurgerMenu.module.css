@@ -12,9 +12,11 @@
 }
 
 .body {
-  @apply relative z-10 bg-white h-full w-full overflow-y-scroll py-8 px-10 flex flex-col;
-  width: 93.846153846153846%;
-  max-width: 366px;
+  @apply relative z-10 bg-white h-full w-full overflow-y-scroll py-8 px-10 flex  flex-col;
+  /* width: 93.846153846153846%; */
+  width: 100%;
+  height: 90vh;
+  /* max-width: 366px; */
 }
 
 .burger-link {

@@ -15,13 +15,16 @@ import { useRegions } from "../RegionsProvider";
 import { messages } from "../translations";
 import styles from "./BurgerMenu.module.css";
 import { CollapseMenu } from "./CollapseMenu";
+import Navbar from "../Navbar";
+import MobileNav from "../Navbar/MobileNav";
 
 export interface BurgerMenuProps {
   open?: boolean;
   onCloseClick?: () => void;
+  externalCheckoutUrl: string;
 }
 
-export function BurgerMenu({ open, onCloseClick }: BurgerMenuProps) {
+export function BurgerMenu({ open, onCloseClick, externalCheckoutUrl }: BurgerMenuProps) {
   const paths = usePaths();
   const { query } = useRegions();
   const t = useIntl();
@@ -49,14 +52,24 @@ export function BurgerMenu({ open, onCloseClick }: BurgerMenuProps) {
     >
       <div className={styles.backdrop} aria-hidden="true" onClick={onCloseClick} />
       <div className={styles.body}>
-        <div className="flex justify-end w-full mb-5">
+        {/* <div className="flex justify-end w-full mb-5">
           <NavIconButton icon="close" onClick={onCloseClick} />
-        </div>
+          
+        </div> */}
+        {/* <Link href={paths.$url()} passHref legacyBehavior>
+        <h1 className="text-main !text-[18px] leading-[1.2em] font-semibold block w-full text-left mb-[2.4000000000000004rem]">Home</h1>
+            </Link>
+            <Link href={paths.search.$url()} passHref legacyBehavior>
+            <h1 className="text-main !text-[18px] leading-[1.2em] font-semibold block w-full text-left mb-[2.4000000000000004rem]">Search</h1>
+            </Link>
+            <Link href={externalCheckoutUrl} passHref legacyBehavior>
+            <h1 className="text-main !text-[18px] leading-[1.2em] font-semibold block w-full text-left mb-[2.4000000000000004rem]">Cart</h1>
+            </Link> */}
         {menu.map((item) => (
           <CollapseMenu menuItem={item} key={item.id} />
         ))}
-        <h1>home</h1>
-        <div className="mt-auto pt-4">
+
+        {/* <div className="mt-auto pt-4">
           <div className="flex flex-col">
             {authenticated ? (
               <>
@@ -85,11 +98,11 @@ export function BurgerMenu({ open, onCloseClick }: BurgerMenuProps) {
               </button>
             )}
           </div>
-        </div>
-        <div className="flex mt-4 gap-4">
+        </div> */}
+        {/* <div className="flex mt-4 gap-4">
           <ChannelDropdown />
           <LocaleDropdown />
-        </div>
+        </div> */}
       </div>
     </div>
   );

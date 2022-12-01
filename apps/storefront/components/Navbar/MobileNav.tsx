@@ -16,9 +16,8 @@ import Stamp from "./Stamp";
 import UserMenu from "./UserMenu";
 import { useRegions } from "@/components/RegionsProvider";
 import { invariant } from "@apollo/client/utilities/globals";
-import MobileNav from "./MobileNav";
 
-export function Navbar() {
+const MobileNav = () => {
   const paths = usePaths();
   const router = useRouter();
 
@@ -61,19 +60,11 @@ export function Navbar() {
         line ? amount + line.quantity : amount,
       0
     ) || 0;
-
   return (
     <>
       <div className={clsx(styles.navbar)}>
         <div className={clsx(styles.inner)}>
-          <div className="flex-1 flex xs:justify-start">
-            <Link href={paths.$url()} passHref legacyBehavior>
-              <a href="pass" className={styles.logo}>
-                <Stamp />
-              </a>
-            </Link>
-          </div>
-          <div className="flex-1 flex justify-end collapse lg:visible">
+          <div className="flex-1 flex justify-center">
             {!authenticated ? (
               <Link href={paths.account.login.$url()} passHref legacyBehavior>
                 <a href="pass" data-testid="userIcon">
@@ -91,23 +82,17 @@ export function Navbar() {
                 <NavIconButton isButton={false} icon="spyglass" />
               </a>
             </Link>
-            <NavIconButton
-              icon="menu"
-              className="ml-4 lg:hidden"
-              onClick={() => setBurgerOpen(true)}
-            />
+
             <Link href={paths.wishlist.$url()} passHref legacyBehavior>
               <a href="pass" className="hidden lg:flex ml-6" data-testid="searchIcon">
                 <NavIconButton isButton={false} icon="wishlist" />
               </a>
             </Link>
-          </div>
-          <div className="lg:hidden">
-            <Link href={paths.search.$url()} passHref legacyBehavior>
-              <a href="pass" className="flex  ml-6" data-testid="searchIcon">
-                <NavIconButton isButton={false} icon="spyglass" />
-              </a>
-            </Link>
+            <NavIconButton
+              icon="menu"
+              className="ml-4 lg:hidden"
+              onClick={() => setBurgerOpen(true)}
+            />
           </div>
         </div>
         {/* categories menu */}
@@ -124,11 +109,8 @@ export function Navbar() {
         onCloseClick={() => setBurgerOpen(false)}
         externalCheckoutUrl={checkout ? `/checkout/?${checkoutParams.toString()}` : "#"}
       />
-      <div className="fixed bottom-0 z-50 w-full  bg-[red] lg:hidden">
-        <MobileNav />
-      </div>
     </>
   );
-}
+};
 
-export default Navbar;
+export default MobileNav;
