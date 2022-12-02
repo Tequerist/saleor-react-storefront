@@ -21,13 +21,31 @@ export interface ProductGalleryProps {
 }
 
 export function ProductGallery({ product, selectedVariant }: ProductGalleryProps) {
-  const [expandedImage, setExpandedImage] = useState<ProductMediaFragment | undefined>(undefined);
-  const [videoToPlay, setVideoToPlay] = useState<ProductMediaFragment | undefined>(undefined);
+  // const [expandedImage, setExpandedImage] = useState<ProductMediaFragment | undefined>(undefined);
+  // const [videoToPlay, setVideoToPlay] = useState<ProductMediaFragment | undefined>(undefined);
+  const [bgShow, setBgShow] = useState(false);
+  const [state, setState] = useState("0% 0%");
+  const handleMouseMove = (e: any) => {
+    const { left, top, width, height } = e.target.getBoundingClientRect();
+    const x = ((e.pageX - left) / width) * 100;
+    const y = ((e.pageY - top) / height) * 100;
+    setState(`${x}% ${y}%`);
+  };
 
   const galleryMedia = getGalleryMedia({ product, selectedVariant });
   const galleryInputs = galleryMedia?.map((media: ProductMediaFragment) => ({
-    original: media.url,
     thumbnail: media.type === "IMAGE" ? media.url : "",
+    renderItem: () => {
+      return (
+        <div
+          onMouseMove={handleMouseMove}
+          className="gallery-slide "
+          style={{ backgroundImage: `url(${bgShow ? media.url : ""})`, backgroundPosition: state }}
+        >
+          <img className="image-gallery-image" src={media.url} />
+        </div>
+      );
+    },
   }));
 
   return (
@@ -42,10 +60,15 @@ export function ProductGallery({ product, selectedVariant }: ProductGalleryProps
         }}
       >
         <div className="w-[600px]">
-          <div className="fav-icon">
+          {/* <div className="fav-icon">
             <MdFavoriteBorder size={"40px"} color="grey" />
-          </div>
-          <ReactImageGallery items={galleryInputs} showPlayButton={false} />
+          </div> */}
+          <ReactImageGallery
+            items={galleryInputs}
+            showPlayButton={false}
+            onMouseOver={() => setBgShow(true)}
+            onMouseLeave={() => setBgShow(false)}
+          />
         </div>
         {/* {galleryMedia?.map((media: ProductMediaFragment) => {
           const videoThumbnailUrl = getVideoThumbnail(media.url); 

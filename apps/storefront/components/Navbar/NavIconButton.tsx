@@ -7,9 +7,10 @@ import styles from "./Navbar.module.css"; // in the final version it should be i
 import Spyglass from "./spyglassIcon.svg"; // in the final version it should be imported from ui-kit package
 import User from "./userIcon.svg"; // in the final version it should be imported from ui-kit package
 import Favourite from "./favouriteIcon.svg"; // in the final version it should be imported from ui-kit package
+import Category from "./categoryIcon.svg"; // in the final version it should be imported from ui-kit package
 
 interface NavIconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  icon: "user" | "bag" | "spyglass" | "menu" | "close" | "wishlist";
+  icon: "user" | "bag" | "spyglass" | "menu" | "close" | "wishlist" | "categories";
   counter?: number;
   isButton?: boolean;
 }
@@ -28,6 +29,8 @@ const getIcon = (iconName: NavIconButtonProps["icon"]) => {
       return <Close />;
     case "wishlist":
       return <Favourite />;
+    case "categories":
+      return <Category />;
     default:
       return iconName;
   }

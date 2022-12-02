@@ -77,32 +77,21 @@ const MobileNav = () => {
             <a href={externalCheckoutUrl} className="ml-6 hidden xs:flex" data-testid="cartIcon">
               <NavIconButton isButton={false} icon="bag" aria-hidden="true" counter={counter} />
             </a>
-            <Link href={paths.search.$url()} passHref legacyBehavior>
-              <a href="pass" className="hidden lg:flex ml-6" data-testid="searchIcon">
-                <NavIconButton isButton={false} icon="spyglass" />
-              </a>
-            </Link>
-
-            <Link href={paths.wishlist.$url()} passHref legacyBehavior>
-              <a href="pass" className="hidden lg:flex ml-6" data-testid="searchIcon">
-                <NavIconButton isButton={false} icon="wishlist" />
-              </a>
-            </Link>
             <NavIconButton
-              icon="menu"
-              className="ml-4 lg:hidden"
+              icon="categories"
+              className="ml-6 lg:hidden"
               onClick={() => setBurgerOpen(true)}
             />
           </div>
         </div>
         {/* categories menu */}
-        <div className={clsx(styles.innerTwoWrap)}>
+        {/* <div className={clsx(styles.innerTwoWrap)}>
           <div className={clsx(styles.innerTwo)}>
             <div className="flex-2 h-full hidden xs:flex">
               <Menu />
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       <BurgerMenu
         open={isBurgerOpen}

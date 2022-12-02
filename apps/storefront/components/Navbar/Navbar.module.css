@@ -6,7 +6,7 @@
   @apply container h-18 flex flex-nowrap items-center;
 }
 .innerTwoWrap {
-  @apply hidden md:block lg:block;
+  @apply hidden md:hidden lg:block;
   background: linear-gradient(90deg, #4776e6 0%, #8e54e9 100%);
 }
 .innerTwo {

@@ -32,10 +32,22 @@
   transition: 0.1s;
   overflow: hidden;
 }
-.image-gallery-image:hover {
+.gallery-slide img {
+  display: block;
+  width: 100%;
+  pointer-events: none;
+}
+.gallery-slide {
+  width: 100%;
+  background-repeat: no-repeat;
+}
+.gallery-slide:hover img {
+  opacity: 0;
+}
+/* .image-gallery-image:hover {
   transform: scale(1.8);
   transition: 0.2s;
-}
+} */
 .image-gallery-svg {
   width: 40px !important;
   background-color: #f3f4f6;

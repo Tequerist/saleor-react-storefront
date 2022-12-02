@@ -46,7 +46,7 @@ export function EmailSection({ checkout }: EmailSectionProps) {
 
   return (
     <>
-      <div className="mt-4 mb-4 bg-black p-10">
+      <div className="mt-4 mb-4 bg-#fff p-10">
         <h2 className="checkout-section-header-active">
           {t.formatMessage(messages.emailAddressCardHeader)}
         </h2>

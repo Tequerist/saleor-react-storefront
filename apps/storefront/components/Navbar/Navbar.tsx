@@ -97,7 +97,7 @@ export function Navbar() {
               onClick={() => setBurgerOpen(true)}
             />
             <Link href={paths.wishlist.$url()} passHref legacyBehavior>
-              <a href="pass" className="hidden lg:flex ml-6" data-testid="searchIcon">
+              <a href="pass" className="hidden lg:hidden ml-6" data-testid="searchIcon">
                 <NavIconButton isButton={false} icon="wishlist" />
               </a>
             </Link>

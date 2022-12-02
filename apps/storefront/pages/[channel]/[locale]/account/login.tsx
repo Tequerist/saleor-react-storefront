@@ -1,7 +1,7 @@
 import { useAuth, useAuthState } from "@saleor/sdk";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { useIntl } from "react-intl";
 
@@ -9,6 +9,7 @@ import { messages } from "@/components/translations";
 import { DEMO_MODE } from "@/lib/const";
 import { usePaths } from "@/lib/paths";
 import LoginIcon from "./loginIcon.svg";
+import { Layout } from "@/components";
 
 export type OptionalQuery = {
   next?: string;
@@ -141,3 +142,7 @@ function LoginPage() {
 }
 
 export default LoginPage;
+
+LoginPage.getLayout = function getLayout(page: ReactElement) {
+  return <Layout>{page}</Layout>;
+};
