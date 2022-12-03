@@ -21,7 +21,7 @@ import MobileNav from "./MobileNav";
 export function Navbar() {
   const paths = usePaths();
   const router = useRouter();
-
+  console.log(router.route);
   const [isBurgerOpen, setBurgerOpen] = useState(false);
   const { authenticated } = useAuthState();
   const { checkout } = useCheckout();
@@ -104,13 +104,16 @@ export function Navbar() {
           </div>
         </div>
         {/* categories menu */}
-        <div className={clsx(styles.innerTwoWrap)}>
-          <div className={clsx(styles.innerTwo)}>
-            <div className="flex-2 h-full hidden xs:flex">
-              <Menu />
+        {router.route !== "/[channel]/[locale]/account/register" &&
+          router.route !== "/[channel]/[locale]/account/login" && (
+            <div className={clsx(styles.innerTwoWrap)}>
+              <div className={clsx(styles.innerTwo)}>
+                <div className="flex-2 h-full hidden xs:flex">
+                  <Menu />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          )}
       </div>
       <BurgerMenu
         open={isBurgerOpen}

@@ -1,5 +1,5 @@
 .footer {
-  @apply mb-4 sm:mb-3 mt-16;
+  @apply mb-4 sm:mb-3; /* mt-16 */
   background: linear-gradient(90deg, #4776e6 0%, #8e54e9 100%);
 }
 
@@ -10,6 +10,7 @@
   border: 1px solid transparent;
   border-radius: 20px;
   padding-top: 60px !important;
+  margin-top: 0 !important;
 }
 .secondFooterWrap {
   background-color: #fff;
