@@ -52,10 +52,9 @@ export function BurgerMenu({ open, onCloseClick, externalCheckoutUrl }: BurgerMe
     >
       <div className={styles.backdrop} aria-hidden="true" onClick={onCloseClick} />
       <div className={styles.body}>
-        {/* <div className="flex justify-end w-full mb-5">
-          <NavIconButton icon="close" onClick={onCloseClick} />
-          
-        </div> */}
+        <div className="flex justify-start w-full mb-5">
+          <NavIconButton icon="back" onClick={onCloseClick} />
+        </div>
         {/* <Link href={paths.$url()} passHref legacyBehavior>
         <h1 className="text-main !text-[18px] leading-[1.2em] font-semibold block w-full text-left mb-[2.4000000000000004rem]">Home</h1>
             </Link>

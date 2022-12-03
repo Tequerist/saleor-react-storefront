@@ -73,25 +73,25 @@ export function Navbar() {
               </a>
             </Link>
           </div>
-          <div className="flex-1 flex justify-end collapse lg:visible">
+          <div className="flex-1 flex justify-end ">
             {!authenticated ? (
               <Link href={paths.account.login.$url()} passHref legacyBehavior>
-                <a href="pass" data-testid="userIcon">
+                <a href="pass" className="hidden lg:flex" data-testid="userIcon">
                   <NavIconButton isButton={false} icon="user" aria-hidden="true" />
                 </a>
               </Link>
             ) : (
               <UserMenu />
             )}
-            <a href={externalCheckoutUrl} className="ml-6 hidden xs:flex" data-testid="cartIcon">
+            <a href={externalCheckoutUrl} className="ml-6 hidden lg:flex" data-testid="cartIcon">
               <NavIconButton isButton={false} icon="bag" aria-hidden="true" counter={counter} />
             </a>
             <Link href={paths.search.$url()} passHref legacyBehavior>
-              <a href="pass" className="hidden lg:flex ml-6" data-testid="searchIcon">
+              <a href="pass" className="flex ml-6" data-testid="searchIcon">
                 <NavIconButton isButton={false} icon="spyglass" />
               </a>
             </Link>
-            <NavIconButton
+            {/* <NavIconButton
               icon="menu"
               className="ml-4 lg:hidden"
               onClick={() => setBurgerOpen(true)}
@@ -100,24 +100,17 @@ export function Navbar() {
               <a href="pass" className="hidden lg:hidden ml-6" data-testid="searchIcon">
                 <NavIconButton isButton={false} icon="wishlist" />
               </a>
-            </Link>
-          </div>
-          <div className="lg:hidden">
-            <Link href={paths.search.$url()} passHref legacyBehavior>
-              <a href="pass" className="flex  ml-6" data-testid="searchIcon">
-                <NavIconButton isButton={false} icon="spyglass" />
-              </a>
-            </Link>
+            </Link> */}
           </div>
         </div>
         {/* categories menu */}
-        <div className={clsx(styles.innerTwoWrap)}>
+        {/* <div className={clsx(styles.innerTwoWrap)}>
           <div className={clsx(styles.innerTwo)}>
             <div className="flex-2 h-full hidden xs:flex">
               <Menu />
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       <BurgerMenu
         open={isBurgerOpen}

@@ -1,16 +1,27 @@
 import { ButtonHTMLAttributes } from "react";
 
-import Bag from "./bagIcon.svg"; // in the final version it should be imported from ui-kit package
-import Close from "./closeIocn.svg"; // in the final version it should be imported from ui-kit package
-import MenuIcon from "./menuIcon.svg"; // in the final version it should be imported from ui-kit package
+import Bag from "./NavbarIcons/bagIcon.svg"; // in the final version it should be imported from ui-kit package
+import Close from "./NavbarIcons/closeIocn.svg"; // in the final version it should be imported from ui-kit package
+import MenuIcon from "./NavbarIcons/menuIcon.svg"; // in the final version it should be imported from ui-kit package
 import styles from "./Navbar.module.css"; // in the final version it should be imported from ui-kit package
-import Spyglass from "./spyglassIcon.svg"; // in the final version it should be imported from ui-kit package
-import User from "./userIcon.svg"; // in the final version it should be imported from ui-kit package
-import Favourite from "./favouriteIcon.svg"; // in the final version it should be imported from ui-kit package
-import Category from "./categoryIcon.svg"; // in the final version it should be imported from ui-kit package
+import Spyglass from "./NavbarIcons/spyglassIcon.svg"; // in the final version it should be imported from ui-kit package
+import User from "./NavbarIcons/userIcon.svg"; // in the final version it should be imported from ui-kit package
+import Favourite from "./NavbarIcons/favouriteIcon.svg"; // in the final version it should be imported from ui-kit package
+import Category from "./NavbarIcons/categoryIcon.svg"; // in the final version it should be imported from ui-kit package
+import Home from "./NavbarIcons/homeIcon.svg"; // in the final version it should be imported from ui-kit package
+import Back from "./NavbarIcons/backIcon.svg"; // in the final version it should be imported from ui-kit package
 
 interface NavIconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  icon: "user" | "bag" | "spyglass" | "menu" | "close" | "wishlist" | "categories";
+  icon:
+    | "user"
+    | "bag"
+    | "spyglass"
+    | "menu"
+    | "close"
+    | "wishlist"
+    | "categories"
+    | "home"
+    | "back";
   counter?: number;
   isButton?: boolean;
 }
@@ -31,6 +42,10 @@ const getIcon = (iconName: NavIconButtonProps["icon"]) => {
       return <Favourite />;
     case "categories":
       return <Category />;
+    case "home":
+      return <Home />;
+    case "back":
+      return <Back />;
     default:
       return iconName;
   }

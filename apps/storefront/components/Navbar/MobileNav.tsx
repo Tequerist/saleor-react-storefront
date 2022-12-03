@@ -65,23 +65,24 @@ const MobileNav = () => {
       <div className={clsx(styles.navbar)}>
         <div className={clsx(styles.inner)}>
           <div className="flex-1 flex justify-center">
+            <Link href={paths.$url()} passHref legacyBehavior>
+              <a href="pass" data-testid="homeicon">
+                <NavIconButton isButton={false} icon="home" aria-hidden="true" />
+              </a>
+            </Link>
             {!authenticated ? (
               <Link href={paths.account.login.$url()} passHref legacyBehavior>
-                <a href="pass" data-testid="userIcon">
-                  <NavIconButton isButton={false} icon="user" aria-hidden="true" />
+                <a href="pass" className="ml-6 " data-testid="userIcon">
+                  <NavIconButton isButton={true} icon="user" aria-hidden="true" />
                 </a>
               </Link>
             ) : (
               <UserMenu />
             )}
-            <a href={externalCheckoutUrl} className="ml-6 hidden xs:flex" data-testid="cartIcon">
+            <a href={externalCheckoutUrl} className="ml-6  xs:flex" data-testid="cartIcon">
               <NavIconButton isButton={false} icon="bag" aria-hidden="true" counter={counter} />
             </a>
-            <NavIconButton
-              icon="categories"
-              className="ml-6 lg:hidden"
-              onClick={() => setBurgerOpen(true)}
-            />
+            <NavIconButton icon="categories" className="ml-6" onClick={() => setBurgerOpen(true)} />
           </div>
         </div>
         {/* categories menu */}
