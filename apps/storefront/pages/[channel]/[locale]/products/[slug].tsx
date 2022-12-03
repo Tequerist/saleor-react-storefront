@@ -232,7 +232,7 @@ function ProductPage({ product }: InferGetStaticPropsType<typeof getStaticProps>
 
           {description && (
             <div className="space-y-6 !mt-10">
-              <h2 className="text-[20px] !mb-0 font-semibold">Overview</h2>
+              <h2 className="text-[18px] !mb-0 font-semibold">Overview</h2>
               <RichText jsonStringData={description} />
             </div>
           )}

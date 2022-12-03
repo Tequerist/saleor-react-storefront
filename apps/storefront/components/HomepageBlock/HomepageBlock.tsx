@@ -56,7 +56,7 @@ export function HomepageBlock({ menuItem }: HomepageBlockProps) {
         >
           {translate(menuItem, "name")}
         </h1>
-        <div className="flex flex-row-reverse py-2 px-4 rounded-[10px] border-solid border-2 border-Slate-500 h-max hover:bg-black hover:text-white hover:border-black">
+        <div className="flex flex-row-reverse py-2 px-4 rounded-[10px] border-solid border-2 border-Slate-500 h-max hover:bg-black hover:text-white hover:border-black transition-[.3s]">
           <Link href={link} passHref legacyBehavior>
             <a href="pass mb-0">
               <p className="text-base">{t.formatMessage(messages.more)}</p>

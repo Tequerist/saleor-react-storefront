@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @layer components {
   .btn-blue {
     @apply py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
@@ -21,6 +20,18 @@
   .btn-checkout-section {
     @apply w-full bg-blue-100 border border-blue-300 rounded-md shadow-sm py-2 px-4 text-base font-medium hover:bg-blue-200;
   }
+}
+html {
+  font-size: 62.5%;
+}
+@import "~react-image-gallery/styles/css/image-gallery.css";
+
+/* Colours linking */
+:root {
+  --theme: hsl(246, 74%, 65%);
+  --black: rgb(0, 0, 0);
+  --white: rgb(255, 255, 255);
+  --grey-outline: rgb(218, 218, 218);
 }
 
 .dropdown:focus-within .dropdown-menu {
@@ -52,7 +63,7 @@
   width: 40px !important;
   background-color: #f3f4f6;
   height: 40px !important;
-  stroke: rgb(0, 0, 0);
+  stroke: var(--black);
   padding: 10px;
   border-radius: 10px;
   stroke-width: 2px;
@@ -70,12 +81,12 @@
 .image-gallery-thumbnail.active,
 .image-gallery-thumbnail:focus {
   outline: none;
-  border: 2px solid #7074df !important;
+  border: 2px solid var(--theme) !important;
   border-radius: 15px;
 }
 .image-gallery-thumbnail:hover {
   outline: none;
-  border: 2px solid #7074df !important;
+  border: 2px solid var(--theme) !important;
   border-radius: 15px;
 }
 .fav-icon {
@@ -94,13 +105,13 @@
   position: relative;
 }
 .image-gallery-content.fullscreen {
-  background: #fff !important;
+  background: var(--white) !important;
 }
 .image-gallery-play-button svg {
   width: 50px !important;
   height: 50px !important;
   padding: 12px;
-  stroke: #7b7b7b;
+  stroke: hsl(0, 0%, 48%);
 }
 .image-gallery-play-button {
   position: absolute;
@@ -110,11 +121,13 @@
   height: 50px;
 }
 .attribute-item {
-  border: 1px solid rgb(218, 218, 218);
+  border: 1px solid var(--grey-outline);
   border-radius: 12px;
   padding: 20px;
 }
-html {
-  font-size: 62.5%;
+.category-header-item button {
+  transition: 0.2s;
 }
-@import "~react-image-gallery/styles/css/image-gallery.css";
+.category-header-item button:hover {
+  border-color: var(--theme);
+}
