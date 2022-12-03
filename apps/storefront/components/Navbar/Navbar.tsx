@@ -104,13 +104,13 @@ export function Navbar() {
           </div>
         </div>
         {/* categories menu */}
-        {/* <div className={clsx(styles.innerTwoWrap)}>
+        <div className={clsx(styles.innerTwoWrap)}>
           <div className={clsx(styles.innerTwo)}>
             <div className="flex-2 h-full hidden xs:flex">
               <Menu />
             </div>
           </div>
-        </div> */}
+        </div>
       </div>
       <BurgerMenu
         open={isBurgerOpen}
