@@ -1,5 +1,6 @@
+import { Layout } from "@/components";
 import Wishlist from "@/components/Wishlist";
-import React from "react";
+import React, { ReactElement } from "react";
 
 const wishlistpage = () => {
   return (
@@ -10,3 +11,7 @@ const wishlistpage = () => {
 };
 
 export default wishlistpage;
+
+wishlistpage.getLayout = function getLayout(page: ReactElement) {
+  return <Layout>{page}</Layout>;
+};

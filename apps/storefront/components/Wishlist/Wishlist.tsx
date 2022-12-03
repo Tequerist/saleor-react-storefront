@@ -1,15 +1,14 @@
 import React from "react";
+import WishListPoster from "./WishListPoster";
 
 const Wishlist = () => {
   return (
-    <div className="container p-5 ">
-      <div className=" flex items-center h-[100px] border mb-5">
-        <h1 className="text-xl ml-5">My wishlist</h1>
+    <div className="container p-5 shadow-lg mt-10 divide-y">
+      <div className="wish-list-header flex items-center h-[50px]">
+        <h1 className="text-lg ml-5">My wishlist</h1>
       </div>
-      <div className="h-[200px] border flex items-center justify-between p-10">
-        <div className="text-md">Image</div>
-        <div className="text-md">Details</div>
-        <button className="text-md">Delete</button>
+      <div className="wish-list-body divide-y">
+        <WishListPoster />
       </div>
     </div>
   );
