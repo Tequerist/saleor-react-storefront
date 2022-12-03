@@ -11,7 +11,7 @@ import {
   ProductMediaFragment,
   ProductVariantDetailsFragment,
 } from "@/saleor/api";
-import ReactImageGallery from "react-image-gallery";
+import ReactImageGallery, { ReactImageGalleryItem } from "react-image-gallery";
 import { MdFavoriteBorder } from "react-icons/md";
 import { IconButton } from "@saleor/ui-kit";
 
@@ -20,32 +20,67 @@ export interface ProductGalleryProps {
   selectedVariant?: ProductVariantDetailsFragment;
 }
 
-export function ProductGallery({ product, selectedVariant }: ProductGalleryProps) {
-  // const [expandedImage, setExpandedImage] = useState<ProductMediaFragment | undefined>(undefined);
-  // const [videoToPlay, setVideoToPlay] = useState<ProductMediaFragment | undefined>(undefined);
-  const [bgShow, setBgShow] = useState(false);
+export const RenderItem = (props: { item: ReactImageGalleryItem }) => {
   const [state, setState] = useState("0% 0%");
+  const [bgShow, setBgShow] = useState(false);
   const handleMouseMove = (e: any) => {
     const { left, top, width, height } = e.target.getBoundingClientRect();
     const x = ((e.pageX - left) / width) * 100;
     const y = ((e.pageY - top) / height) * 100;
     setState(`${x}% ${y}%`);
   };
+  return (
+    <div
+      onMouseMove={handleMouseMove}
+      onMouseLeave={() => setBgShow(false)}
+      onMouseEnter={() => setBgShow(true)}
+      className="gallery-slide "
+      style={{
+        backgroundImage: `url(${bgShow ? props.item.original : ""})`,
+        backgroundPosition: state,
+      }}
+    >
+      <img className="image-gallery-image" src={props.item.original} />
+    </div>
+  );
+};
+
+export function ProductGallery({ product, selectedVariant }: ProductGalleryProps) {
+  // const [expandedImage, setExpandedImage] = useState<ProductMediaFragment | undefined>(undefined);
+  // const [videoToPlay, setVideoToPlay] = useState<ProductMediaFragment | undefined>(undefined);
+
+  // const galleryMedia = getGalleryMedia({ product, selectedVariant });
+  // const galleryInputs = galleryMedia?.map((media: ProductMediaFragment) => ({
+  //   original: media.url,
+  //   thumbnail: media.type === "IMAGE" ? media.url : "",
+  //   // renderItem: () => {
+  //   //   return (
+  //   //     <div
+  //   //       onMouseMove={handleMouseMove}
+  //   //       className="gallery-slide "
+  //   //       style={{ backgroundImage: `url(${bgShow ? media.url : ""})`, backgroundPosition: state }}
+  //   //     >
+  //   //       <img className="image-gallery-image" src={media.url} />
+  //   //     </div>
+  //   //   );
+  //   // },
+  // }));
 
   const galleryMedia = getGalleryMedia({ product, selectedVariant });
   const galleryInputs = galleryMedia?.map((media: ProductMediaFragment) => ({
+    original: media.url,
     thumbnail: media.type === "IMAGE" ? media.url : "",
-    renderItem: () => {
-      return (
-        <div
-          onMouseMove={handleMouseMove}
-          className="gallery-slide "
-          style={{ backgroundImage: `url(${bgShow ? media.url : ""})`, backgroundPosition: state }}
-        >
-          <img className="image-gallery-image" src={media.url} />
-        </div>
-      );
-    },
+    // renderItem: () => {
+    //   return (
+    //     <div
+    //       onMouseMove={handleMouseMove}
+    //       className="gallery-slide "
+    //       style={{ backgroundImage: `url(${media.url})` }}
+    //     >
+    //       <img className="image-gallery-image" src={media.url} />
+    //     </div>
+    //   );
+    // },
   }));
 
   return (
@@ -64,10 +99,9 @@ export function ProductGallery({ product, selectedVariant }: ProductGalleryProps
             <MdFavoriteBorder size={"40px"} color="grey" />
           </div> */}
           <ReactImageGallery
+            renderItem={(item) => <RenderItem item={item} />}
             items={galleryInputs}
             showPlayButton={false}
-            onMouseOver={() => setBgShow(true)}
-            onMouseLeave={() => setBgShow(false)}
           />
         </div>
         {/* {galleryMedia?.map((media: ProductMediaFragment) => {
