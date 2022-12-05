@@ -79,7 +79,7 @@ function LoginPage() {
                 <span className="text-[15px] py-2 !lg:py-10 !font-thin text-gray-400">
                   {t.formatMessage(messages.loginWelcomeMessage)}
                 </span>
-                <h1 className="text-[28px] py-1 pb-6 font-bold">
+                <h1 className="sm:text-[28px] text-[24px] py-1 pb-6 font-bold">
                   {t.formatMessage(messages.loginHeader)}
                 </h1>
               </div>

@@ -40,7 +40,7 @@
 }
 
 .collapse-sub {
-  @apply text-main text-[1.6rem] leading-[1.2em] font-medium flex w-full;
+  @apply text-main text-[1.6rem] leading-[1.2em] font-normal flex w-full;
 }
 
 .collapse-sub svg {

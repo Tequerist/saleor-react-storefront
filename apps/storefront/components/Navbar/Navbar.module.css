@@ -1,10 +1,11 @@
 .navbar {
-  @apply bg-white text-main sticky top-0 z-[52] drop-shadow-md;
+  @apply bg-white text-main sticky top-0 z-[52];
   box-shadow: 0px 0px 22px 0px rgba(0, 0, 0, 0.09);
 }
 
 .inner {
   @apply container h-18 flex flex-nowrap items-center;
+  /* box-shadow: 0px 0px 22px 0px rgba(0, 0, 0, 0.09); */
 }
 .innerTwoWrap {
   @apply hidden md:hidden lg:block;
@@ -85,9 +86,23 @@
 }
 
 .user-menu {
-  @apply absolute top-[100%] right-0 shadow-modal flex flex-col invisible bg-white rounded-3xl p-4;
+  @apply absolute sm:top-[100%] right-0 shadow-modal flex flex-col invisible bg-white rounded-3xl p-4;
 }
-
+@media (max-width: 440px) {
+  .user-menu {
+    bottom: 0;
+    height: calc(100vh - 7.2rem);
+    border-radius: 0;
+    width: 100vw;
+    z-index: -2;
+  }
+  .user-menu-container {
+    position: initial;
+  }
+  .user-menu-item {
+    font-size: 16px !important;
+  }
+}
 .user-menu-item {
   @apply px-4 pt-[14px] pb-[13px] text-[14px] font-medium cursor-pointer flex items-center whitespace-nowrap hover:text-brand;
 }
