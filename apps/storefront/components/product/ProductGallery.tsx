@@ -66,7 +66,7 @@ export function ProductGallery({ product, selectedVariant }: ProductGalleryProps
   //   // },
   // }));
 
-  const galleryMedia = getGalleryMedia({ product, selectedVariant });
+  const galleryMedia = getGalleryMedia({ product });
   const galleryInputs = galleryMedia?.map((media: ProductMediaFragment) => ({
     original: media.url,
     thumbnail: media.type === "IMAGE" ? media.url : "",
