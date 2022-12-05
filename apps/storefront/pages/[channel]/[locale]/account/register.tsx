@@ -65,11 +65,10 @@ function RegisterPage() {
           <div className="lg:w-3/6">
             <form onSubmit={handleRegister}>
               <div>
-                <h1 className="text-[28px] py-1 pb-6 font-bold">
+                <h1 className="sm:text-[28px] text-[24px] py-1 pb-6 font-bold">
                   {t.formatMessage(messages.registerHeader)}
                 </h1>
               </div>
-
               <div className="my-3">
                 <label htmlFor="email" className="block text-[14px] mb-2">
                   {t.formatMessage(messages.registerEmailFieldLabel)}

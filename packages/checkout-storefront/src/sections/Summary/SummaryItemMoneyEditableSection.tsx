@@ -136,6 +136,7 @@ export const SummaryItemMoneyEditableSection: React.FC<LineItemQuantitySelectorP
           {...getInputProps("quantity", { onBlur: handleQuantityInputBlur })}
         />
       </div>
+
       {updating ? (
         <div className="flex flex-col items-end mt-3 w-full">
           <Skeleton className="w-full" />
@@ -144,6 +145,9 @@ export const SummaryItemMoneyEditableSection: React.FC<LineItemQuantitySelectorP
       ) : (
         <SummaryItemMoneyInfo {...line} classNames={{ container: "mt-1" }} />
       )}
+      <button className="text-[blue]" onClick={() => onLineDelete()}>
+        remove
+      </button>
     </div>
   );
 };

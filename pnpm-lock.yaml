@@ -268,6 +268,7 @@ importers:
       react-icons: ^4.7.1
       react-image-gallery: ^1.2.11
       react-intl: 6.2.1
+      react-responsive-carousel: ^3.2.23
       react-use: 17.4.0
       tailwind-scrollbar-hide: 1.1.7
       tailwindcss: 3.2.1
@@ -304,6 +305,7 @@ importers:
       react-icons: 4.7.1_react@18.2.0
       react-image-gallery: 1.2.11_react@18.2.0
       react-intl: 6.2.1_uz2ogxeagc4rbieizlfzyaazee
+      react-responsive-carousel: 3.2.23
       react-use: 17.4.0_biqbaboplfbrettd7655fr4n2y
       tailwind-scrollbar-hide: 1.1.7
       url-join: 4.0.1
@@ -19819,7 +19821,7 @@ packages:
     dev: true
 
   /prop-types/15.8.1:
-    resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.com/prop-types/-/prop-types-15.8.1.tgz}
+    resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
@@ -20165,6 +20167,13 @@ packages:
       react: 18.2.0
       scheduler: 0.23.0
 
+  /react-easy-swipe/0.0.21:
+    resolution: {integrity: sha512-OeR2jAxdoqUMHIn/nS9fgreI5hSpgGoL5ezdal4+oO7YSSgJR8ga+PkYGJrSrJ9MKlPcQjMQXnketrD7WNmNsg==}
+    engines: {node: '>= 6'}
+    dependencies:
+      prop-types: 15.8.1
+    dev: false
+
   /react-element-to-jsx-string/14.3.4_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-t4ZwvV6vwNxzujDQ+37bspnLwA4JlgUPWhLjBJWsNIDceAf6ZKUTCjdm08cN6WeZ5pTMKiCJkmAYnpmR4Bm+dg==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.com/react-element-to-jsx-string/-/react-element-to-jsx-string-14.3.4.tgz}
     peerDependencies:
@@ -20305,6 +20314,14 @@ packages:
     resolution: {integrity: sha512-F27qZr8uUqwhWZboondsPx8tnC3Ct3SxZA3V5WyEvujRyyNv0VYPhoBg1gZ8/MV5tubQp76Trw8lTv9hzRBa+A==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.com/react-refresh/-/react-refresh-0.11.0.tgz}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /react-responsive-carousel/3.2.23:
+    resolution: {integrity: sha512-pqJLsBaKHWJhw/ItODgbVoziR2z4lpcJg+YwmRlSk4rKH32VE633mAtZZ9kDXjy4wFO+pgUZmDKPsPe1fPmHCg==}
+    dependencies:
+      classnames: 2.3.2
+      prop-types: 15.8.1
+      react-easy-swipe: 0.0.21
+    dev: false
 
   /react-scripts/5.0.1_uqvmreaiyeoclate435itmzle4:
     resolution: {integrity: sha512-8VAmEm/ZAwQzJ+GOMLbBsTdDKOpuZh7RPs0UymvBR2vRk4iZWCskjbFnxqjrzoIvlNNRZ3QJFx6/qDSi6zSnaQ==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.com/react-scripts/-/react-scripts-5.0.1.tgz}

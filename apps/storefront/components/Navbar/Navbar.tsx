@@ -120,7 +120,7 @@ export function Navbar() {
         onCloseClick={() => setBurgerOpen(false)}
         externalCheckoutUrl={checkout ? `/checkout/?${checkoutParams.toString()}` : "#"}
       />
-      <div className="fixed bottom-0 z-50 w-full  bg-[red] lg:hidden">
+      <div className="fixed bottom-0 z-50 w-full bottom-dock bg-[red] lg:hidden">
         <MobileNav />
       </div>
     </>

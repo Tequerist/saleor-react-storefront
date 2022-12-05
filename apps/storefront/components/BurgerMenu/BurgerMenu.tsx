@@ -52,8 +52,9 @@ export function BurgerMenu({ open, onCloseClick, externalCheckoutUrl }: BurgerMe
     >
       <div className={styles.backdrop} aria-hidden="true" onClick={onCloseClick} />
       <div className={styles.body}>
-        <div className="flex justify-start w-full mb-5">
+        <div className="flex justify-start items-center w-fit mb-5 bg-grey py-2 px-4 rounded-2xl">
           <NavIconButton icon="back" onClick={onCloseClick} />
+          <p className="text-[16px] font-semibold ml-2">back</p>
         </div>
         {/* <Link href={paths.$url()} passHref legacyBehavior>
         <h1 className="text-main !text-[18px] leading-[1.2em] font-semibold block w-full text-left mb-[2.4000000000000004rem]">Home</h1>
@@ -64,9 +65,11 @@ export function BurgerMenu({ open, onCloseClick, externalCheckoutUrl }: BurgerMe
             <Link href={externalCheckoutUrl} passHref legacyBehavior>
             <h1 className="text-main !text-[18px] leading-[1.2em] font-semibold block w-full text-left mb-[2.4000000000000004rem]">Cart</h1>
             </Link> */}
-        {menu.map((item) => (
-          <CollapseMenu menuItem={item} key={item.id} />
-        ))}
+        <div className="px-6 py-2">
+          {menu.map((item) => (
+            <CollapseMenu menuItem={item} key={item.id} />
+          ))}
+        </div>
 
         {/* <div className="mt-auto pt-4">
           <div className="flex flex-col">

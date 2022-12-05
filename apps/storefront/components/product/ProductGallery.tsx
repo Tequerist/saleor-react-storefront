@@ -66,7 +66,7 @@ export function ProductGallery({ product, selectedVariant }: ProductGalleryProps
   //   // },
   // }));
 
-  const galleryMedia = getGalleryMedia({ product, selectedVariant });
+  const galleryMedia = getGalleryMedia({ product });
   const galleryInputs = galleryMedia?.map((media: ProductMediaFragment) => ({
     original: media.url,
     thumbnail: media.type === "IMAGE" ? media.url : "",
@@ -87,14 +87,14 @@ export function ProductGallery({ product, selectedVariant }: ProductGalleryProps
     <>
       <div
         className={clsx(
-          "mt-1 mb-2 w-full max-h-screen grid grid-cols-1 gap-2 md:h-full h-96 overflow-scroll scrollbar-hide",
+          "mt-1 mb-2 w-full max-h-screen grid grid-cols-1 gap-2 md:h-full sm:h-[50vh] h-[50vh] overflow-scroll scrollbar-hide",
           galleryMedia.length > 1 && "md:grid-cols-2 md:col-span-2"
         )}
         style={{
           scrollSnapType: "both mandatory",
         }}
       >
-        <div className="w-[600px]">
+        <div className="md:w-[600px] sm:w-auto">
           {/* <div className="fav-icon">
             <MdFavoriteBorder size={"40px"} color="grey" />
           </div> */}

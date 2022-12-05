@@ -33,7 +33,7 @@ export function CollapseMenu({ menuItem }: CollapseMenuProps) {
             {translate(menuItem, "name")}
           </button>
           {open && (
-            <div>
+            <div className="mb-8">
               {menuItem.children?.map((item) => (
                 <SubCollapseMenu menuItem={item} key={item.id} />
               ))}

@@ -26,6 +26,7 @@ module.exports = {
         },
       },
       colors: {
+        grey: "#f4f4f4",
         action: {
           1: "#5B68E4",
           2: "rgba(91, 104, 228, 0.8)",
