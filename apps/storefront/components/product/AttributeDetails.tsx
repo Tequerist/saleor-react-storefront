@@ -18,7 +18,7 @@ export function AttributeDetails({ product, selectedVariant }: AttributeDetailsP
     return null;
   }
   return (
-    <div>
+    <div className="!mb-[50px]">
       <p className="text-[20px] mt-10 mb-4 font-semibold text-black">
         {t.formatMessage(messages.attributes)}
       </p>

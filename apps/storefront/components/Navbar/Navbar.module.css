@@ -1,5 +1,6 @@
 .navbar {
-  @apply bg-white text-main sticky top-0 z-50 drop-shadow-md;
+  @apply bg-white text-main sticky top-0 z-[52] drop-shadow-md;
+  box-shadow: 0px 0px 22px 0px rgba(0, 0, 0, 0.09);
 }
 
 .inner {

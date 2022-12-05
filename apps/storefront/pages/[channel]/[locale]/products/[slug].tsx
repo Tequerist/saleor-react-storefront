@@ -164,7 +164,7 @@ function ProductPage({ product }: InferGetStaticPropsType<typeof getStaticProps>
       <ProductPageSeo product={product} />
       <main
         className={clsx(
-          "grid grid-cols-1 gap-[3rem] max-h-full overflow-auto md:overflow-hidden container pt-8 px-8 md:grid-cols-3"
+          "grid grid-cols-1 sm:gap-[3rem] gap-[0rem] max-h-full overflow-auto md:overflow-hidden container pt-8 px-8 md:grid-cols-3"
         )}
       >
         <div className="col-span-2">
