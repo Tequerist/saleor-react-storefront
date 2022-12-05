@@ -1,19 +1,13 @@
-import { PlayIcon } from "@heroicons/react/outline";
 import clsx from "clsx";
-import Image from "next/legacy/image";
-import { useState } from "react";
+import { useState, MouseEvent } from "react";
 
-import { ImageExpand } from "@/components/product/ImageExpand";
-import { VideoExpand } from "@/components/product/VideoExpand";
-import { getGalleryMedia, getVideoThumbnail } from "@/lib/media";
+import { getGalleryMedia } from "@/lib/media";
 import {
   ProductDetailsFragment,
   ProductMediaFragment,
   ProductVariantDetailsFragment,
 } from "@/saleor/api";
 import ReactImageGallery, { ReactImageGalleryItem } from "react-image-gallery";
-import { MdFavoriteBorder } from "react-icons/md";
-import { IconButton } from "@saleor/ui-kit";
 
 export interface ProductGalleryProps {
   product: ProductDetailsFragment;
@@ -23,15 +17,15 @@ export interface ProductGalleryProps {
 export const RenderItem = (props: { item: ReactImageGalleryItem }) => {
   const [state, setState] = useState("0% 0%");
   const [bgShow, setBgShow] = useState(false);
-  const handleMouseMove = (e: any) => {
-    const { left, top, width, height } = e.target.getBoundingClientRect();
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
     const x = ((e.pageX - left) / width) * 100;
     const y = ((e.pageY - top) / height) * 100;
     setState(`${x}% ${y}%`);
   };
   return (
     <div
-      onMouseMove={handleMouseMove}
+      onMouseMove={(e) => handleMouseMove(e)}
       onMouseLeave={() => setBgShow(false)}
       onMouseEnter={() => setBgShow(true)}
       className="gallery-slide "
@@ -45,7 +39,7 @@ export const RenderItem = (props: { item: ReactImageGalleryItem }) => {
   );
 };
 
-export function ProductGallery({ product, selectedVariant }: ProductGalleryProps) {
+export function ProductGallery({ product }: ProductGalleryProps) {
   // const [expandedImage, setExpandedImage] = useState<ProductMediaFragment | undefined>(undefined);
   // const [videoToPlay, setVideoToPlay] = useState<ProductMediaFragment | undefined>(undefined);
 

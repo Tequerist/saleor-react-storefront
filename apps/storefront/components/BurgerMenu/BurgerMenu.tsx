@@ -1,22 +1,10 @@
-import { useAuthState } from "@saleor/sdk";
 import clsx from "clsx";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useIntl } from "react-intl";
-
-import { useLogout } from "@/lib/auth";
-import { usePaths } from "@/lib/paths";
 import { useMainMenuQuery } from "@/saleor/api";
 
 import NavIconButton from "../Navbar/NavIconButton";
-import { ChannelDropdown } from "../regionDropdowns/ChannelDropdown";
-import { LocaleDropdown } from "../regionDropdowns/LocaleDropdown";
 import { useRegions } from "../RegionsProvider";
-import { messages } from "../translations";
 import styles from "./BurgerMenu.module.css";
 import { CollapseMenu } from "./CollapseMenu";
-import Navbar from "../Navbar";
-import MobileNav from "../Navbar/MobileNav";
 
 export interface BurgerMenuProps {
   open?: boolean;
@@ -24,13 +12,8 @@ export interface BurgerMenuProps {
   externalCheckoutUrl: string;
 }
 
-export function BurgerMenu({ open, onCloseClick, externalCheckoutUrl }: BurgerMenuProps) {
-  const paths = usePaths();
+export function BurgerMenu({ open, onCloseClick }: BurgerMenuProps) {
   const { query } = useRegions();
-  const t = useIntl();
-
-  const { authenticated } = useAuthState();
-  const router = useRouter();
 
   const { error, data } = useMainMenuQuery({
     variables: { ...query },
@@ -39,8 +22,6 @@ export function BurgerMenu({ open, onCloseClick, externalCheckoutUrl }: BurgerMe
   if (error) {
     console.error("BurgerMenu component error", error.message);
   }
-
-  const onLogout = useLogout();
 
   const menu = data?.menu?.items || [];
 

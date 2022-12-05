@@ -4,7 +4,7 @@ interface StampProps {
   className?: string;
 }
 
-function Stamp({ width = 100, height = 33, ...rest }: StampProps) {
+function Stamp(_: StampProps) {
   return (
     <svg
       id="Layer_1"
