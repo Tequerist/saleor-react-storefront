@@ -13,6 +13,8 @@ import { Layout } from "@/components";
 export interface RegisterFormData {
   email: string;
   password: string;
+  firstName: string;
+  lastName: string;
 }
 
 function RegisterPage() {
@@ -30,6 +32,8 @@ function RegisterPage() {
 
   const handleRegister = handleSubmitForm(async (formData: RegisterFormData) => {
     const { data } = await register({
+      firstName: formData.firstName,
+      lastName: formData.lastName,
       email: formData.email,
       password: formData.password,
       redirectUrl: `${window.location.origin}/account/confirm`,
@@ -42,6 +46,10 @@ function RegisterPage() {
           setErrorForm("email", { message: e.message! });
         } else if (e.field === "password") {
           setErrorForm("password", { message: e.message! });
+        } else if (e.field === "firstName") {
+          setErrorForm("firstName", { message: e.message! });
+        } else if (e.field === "lastName") {
+          setErrorForm("lastName", { message: e.message! });
         } else {
           console.error("Registration error:", e);
         }
@@ -68,6 +76,41 @@ function RegisterPage() {
                 <h1 className="text-[28px] py-1 pb-6 font-bold">
                   {t.formatMessage(messages.registerHeader)}
                 </h1>
+              </div>
+
+              <div className="my-3">
+                <label htmlFor="firstName" className="block text-[14px] mb-2">
+                  {t.formatMessage(messages.firstNameField)}
+                </label>
+                <input
+                  className="px-4 w-full border-1 !border-gray-300 py-4 !rounded-3xl text-[16px] outline-none"
+                  type="text"
+                  id="firstName"
+                  spellCheck={false}
+                  {...registerForm("firstName", {
+                    required: true,
+                  })}
+                />
+                {!!errorsForm.firstName && (
+                  <p className="text-sm text-red-500 pt-2">{errorsForm.firstName?.message}</p>
+                )}
+              </div>
+              <div className="my-3">
+                <label htmlFor="lastName" className="block text-[14px] mb-2">
+                  {t.formatMessage(messages.lastNameField)}
+                </label>
+                <input
+                  className="px-4 w-full border-1 !border-gray-300 py-4 !rounded-3xl text-[16px] outline-none"
+                  type="text"
+                  id="lastName"
+                  spellCheck={false}
+                  {...registerForm("lastName", {
+                    required: true,
+                  })}
+                />
+                {!!errorsForm.lastName && (
+                  <p className="text-sm text-red-500 pt-2">{errorsForm.lastName?.message}</p>
+                )}
               </div>
 
               <div className="my-3">
