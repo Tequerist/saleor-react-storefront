@@ -52,7 +52,7 @@ export function BurgerMenu({ open, onCloseClick, externalCheckoutUrl }: BurgerMe
     >
       <div className={styles.backdrop} aria-hidden="true" onClick={onCloseClick} />
       <div className={styles.body}>
-        <div className="flex justify-start items-center w-fit mb-5 w-auto bg-grey py-2 px-4 rounded-2xl">
+        <div className="flex justify-start items-center w-fit mb-5 bg-grey py-2 px-4 rounded-2xl">
           <NavIconButton icon="back" onClick={onCloseClick} />
           <p className="text-[16px] font-semibold ml-2">back</p>
         </div>
