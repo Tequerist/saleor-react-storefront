@@ -73,25 +73,27 @@ export function Navbar() {
               </a>
             </Link>
           </div>
-          <div className="flex-1 flex justify-end ">
-            {!authenticated ? (
-              <Link href={paths.account.login.$url()} passHref legacyBehavior>
-                <a href="pass" className="hidden lg:flex" data-testid="userIcon">
-                  <NavIconButton isButton={false} icon="user" aria-hidden="true" />
+          {router.route !== "/[channel]/[locale]/account/register" &&
+            router.route !== "/[channel]/[locale]/account/login" && (
+              <div className="flex-1 flex justify-end ">
+                <Link href={paths.account.login.$url()} passHref legacyBehavior>
+                  <a href="pass" className="hidden lg:flex" data-testid="userIcon">
+                    <NavIconButton isButton={false} icon="user" aria-hidden="true" />
+                  </a>
+                </Link>
+                <a
+                  href={externalCheckoutUrl}
+                  className="ml-6 hidden lg:flex"
+                  data-testid="cartIcon"
+                >
+                  <NavIconButton isButton={false} icon="bag" aria-hidden="true" counter={counter} />
                 </a>
-              </Link>
-            ) : (
-              <UserMenu />
-            )}
-            <a href={externalCheckoutUrl} className="ml-6 hidden lg:flex" data-testid="cartIcon">
-              <NavIconButton isButton={false} icon="bag" aria-hidden="true" counter={counter} />
-            </a>
-            <Link href={paths.search.$url()} passHref legacyBehavior>
-              <a href="pass" className="flex ml-6" data-testid="searchIcon">
-                <NavIconButton isButton={false} icon="spyglass" />
-              </a>
-            </Link>
-            {/* <NavIconButton
+                <Link href={paths.search.$url()} passHref legacyBehavior>
+                  <a href="pass" className="flex ml-6" data-testid="searchIcon">
+                    <NavIconButton isButton={false} icon="spyglass" />
+                  </a>
+                </Link>
+                {/* <NavIconButton
               icon="menu"
               className="ml-4 lg:hidden"
               onClick={() => setBurgerOpen(true)}
@@ -101,7 +103,8 @@ export function Navbar() {
                 <NavIconButton isButton={false} icon="wishlist" />
               </a>
             </Link> */}
-          </div>
+              </div>
+            )}
         </div>
         {/* categories menu */}
         {router.route !== "/[channel]/[locale]/account/register" &&
