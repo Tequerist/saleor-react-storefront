@@ -28,7 +28,7 @@ export const ClientAppBridgeProvider = ({ children }: { children: ReactNode }) =
 
   // @todo use `saleorApiUrl`
   const domain = app.getState().domain;
-  const saleorApiUrl = `https://${domain}/graphql/`;
+  const saleorApiUrl = `http://${domain}/graphql/`;
   const client = useMemo(
     () => createGraphqlClient(saleorApiUrl, app.getState().token),
     [app, saleorApiUrl]
