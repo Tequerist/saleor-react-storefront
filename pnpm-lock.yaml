@@ -38,12 +38,14 @@ importers:
       ts-invariant: 0.10.3
       tsconfig: workspace:*
       typescript: 4.8.4
+      zustand: ^4.1.4
     dependencies:
       '@saleor/checkout-storefront': link:../../packages/checkout-storefront
       graphql: 16.6.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       ts-invariant: 0.10.3
+      zustand: 4.1.5_react@18.2.0
     devDependencies:
       '@testing-library/jest-dom': 5.16.5
       '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
