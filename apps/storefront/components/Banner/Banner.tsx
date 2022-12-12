@@ -15,7 +15,7 @@ export const Banner = () => {
     <Carousel
       autoPlay={true}
       infiniteLoop={true}
-      showArrows={true}
+      showArrows={false}
       renderArrowPrev={(onClickHandler, hasPrev, label) =>
         hasPrev && (
           <button
