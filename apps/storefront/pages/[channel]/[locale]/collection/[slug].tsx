@@ -84,7 +84,7 @@ function CollectionPage({
           />
         </div>
       </header>
-      <div className="container px-8 mt-4">
+      <div className="container px-8 mt-4 mb-4">
         <FilteredProductList
           attributeFiltersData={attributeFiltersData}
           collectionIDs={[collection.id]}

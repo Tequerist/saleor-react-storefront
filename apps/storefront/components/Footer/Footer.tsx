@@ -47,21 +47,12 @@ export function Footer({ className, ...rest }: FooterProps) {
             {menu.map((item) => (
               <div className="sm:ml-14" key={item?.id}>
                 {item?.url ? (
-                  <a
-                    href={item.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={styles["menu-heading"]}
-                  >
+                  <a href="#" target="_blank" rel="noreferrer" className={styles["menu-heading"]}>
                     {/* {item?.name} */}
                     Link Head
                   </a>
                 ) : (
-                  <Link
-                    href={getLinkPath(item, currentChannel.slug, currentLocale)}
-                    passHref
-                    legacyBehavior
-                  >
+                  <Link href="#" passHref legacyBehavior>
                     <a href="pass" className={styles["menu-heading"]}>
                       {/* {item?.name} */}
                       Link Head
@@ -73,7 +64,7 @@ export function Footer({ className, ...rest }: FooterProps) {
                     <li key={sub?.id}>
                       {sub?.url ? (
                         <a
-                          href={fixMenuItemLocalhostUrl(sub.url)}
+                          href="#"
                           target="_blank"
                           rel="noreferrer"
                           className={styles["menu-link"]}
