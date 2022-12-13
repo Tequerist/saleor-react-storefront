@@ -170,7 +170,7 @@ function ProductPage({ product }: InferGetStaticPropsType<typeof getStaticProps>
         <div className="col-span-2">
           <ProductGallery product={product} selectedVariant={selectedVariant} />
         </div>
-        <div className="space-y-5 mt-10 md:mt-0">
+        <div className="space-y-5 mt-1 md:mt-0">
           <div className="mb-10 mt-6">
             <h1
               className="text-4xl font-bold tracking-tight text-gray-800"
