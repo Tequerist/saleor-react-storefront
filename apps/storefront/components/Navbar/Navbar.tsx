@@ -15,12 +15,15 @@ import Stamp from "./Stamp";
 import { useRegions } from "@/components/RegionsProvider";
 import { invariant } from "@apollo/client/utilities/globals";
 import MobileNav from "./MobileNav";
+import UserMenu from "./UserMenu";
+import { useAuthState } from "@saleor/sdk";
 
 export function Navbar() {
   const paths = usePaths();
   const router = useRouter();
   console.log(router.route);
   const [isBurgerOpen, setBurgerOpen] = useState(false);
+  const { authenticated } = useAuthState();
   const { checkout } = useCheckout();
   const { currentLocale, currentChannel } = useRegions();
 
@@ -73,11 +76,17 @@ export function Navbar() {
           {router.route !== "/[channel]/[locale]/account/register" &&
             router.route !== "/[channel]/[locale]/account/login" && (
               <div className="flex-1 flex justify-end ">
-                <Link href={paths.account.login.$url()} passHref legacyBehavior>
-                  <a href="pass" className="hidden lg:flex" data-testid="userIcon">
-                    <NavIconButton isButton={false} icon="user" aria-hidden="true" />
-                  </a>
-                </Link>
+                {!authenticated ? (
+                  <Link href={paths.account.login.$url()} passHref legacyBehavior>
+                    <a href="pass" className="ml-6 hidden lg:flex" data-testid="userIcon">
+                      <NavIconButton isButton={true} icon="user" aria-hidden="true" />
+                    </a>
+                  </Link>
+                ) : (
+                  <div className="hidden lg:flex">
+                    <UserMenu />
+                  </div>
+                )}
                 <a
                   href={externalCheckoutUrl}
                   className="ml-6 hidden lg:flex"

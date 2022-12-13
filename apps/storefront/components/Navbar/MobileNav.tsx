@@ -79,7 +79,9 @@ const MobileNav = () => {
                 </a>
               </Link>
             ) : (
-              <UserMenu />
+              <div className={clsx(styles["mobile-user-menu"])}>
+                <UserMenu />
+              </div>
             )}
           </div>
         </div>
