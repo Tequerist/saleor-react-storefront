@@ -1,10 +1,18 @@
 import clsx from "clsx";
+// import Link from "next/link";
+// import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+// import { useIntl } from "react-intl";
+
+// import { useLogout } from "@/lib/auth";
+// import { usePaths } from "@/lib/paths";
 import { useMainMenuQuery } from "@/saleor/api";
 
 import NavIconButton from "../Navbar/NavIconButton";
 import { useRegions } from "../RegionsProvider";
 import styles from "./BurgerMenu.module.css";
 import { CollapseMenu } from "./CollapseMenu";
+import { useAuthState } from "@saleor/sdk";
 
 export interface BurgerMenuProps {
   open?: boolean;
@@ -14,10 +22,21 @@ export interface BurgerMenuProps {
 
 export function BurgerMenu({ open, onCloseClick }: BurgerMenuProps) {
   const { query } = useRegions();
+  // const t = useIntl();
+
+  // const [authenticated, setAuthenticated] = useState(false);
+  const [_, setAuthenticated] = useState(false);
+  const { authenticated: actuallyAuthenticated } = useAuthState();
+  // const router = useRouter();
 
   const { error, data } = useMainMenuQuery({
     variables: { ...query },
   });
+
+  // Avoid hydration warning by setting authenticated state in useEffect
+  useEffect(() => {
+    setAuthenticated(actuallyAuthenticated);
+  }, [actuallyAuthenticated]);
 
   if (error) {
     console.error("BurgerMenu component error", error.message);
