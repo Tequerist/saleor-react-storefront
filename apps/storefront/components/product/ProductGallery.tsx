@@ -28,10 +28,12 @@ export const RenderItem = (props: { item: ReactImageGalleryItem }) => {
       onMouseMove={(e) => handleMouseMove(e)}
       onMouseLeave={() => setBgShow(false)}
       onMouseEnter={() => setBgShow(true)}
-      className="gallery-slide "
+      className="gallery-slide"
       style={{
-        backgroundImage: `url(${bgShow ? props.item.original : ""})`,
         backgroundPosition: state,
+        ...(props.item.original !== undefined
+          ? { backgroundImage: `url(${bgShow ? props.item.original : ""})` }
+          : {}),
       }}
     >
       <img className="image-gallery-image" src={props.item.original} />
