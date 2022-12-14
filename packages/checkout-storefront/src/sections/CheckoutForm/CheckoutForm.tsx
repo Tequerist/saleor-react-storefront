@@ -44,23 +44,25 @@ export const CheckoutForm = () => {
           <PaymentSection collapsed={showOnlyContact} />
         </>
       </div>
-      {!showOnlyContact &&
-        (isProcessing ? (
-          <Button
-            className="pay-button"
-            disabled
-            ariaLabel={formatMessage(checkoutFormLabels.pay)}
-            label={formatMessage(commonMessages.processing)}
-          />
-        ) : (
-          <Button
-            ariaLabel={formatMessage(checkoutFormLabels.pay)}
-            label={formatMessage(checkoutFormMessages.pay)}
-            className="pay-button"
-            onClick={handleSubmit}
-            data-testid="pay-button"
-          />
-        ))}
+      <div className="w-[100%] flex justify-start">
+        {!showOnlyContact &&
+          (isProcessing ? (
+            <Button
+              className="pay-button"
+              disabled
+              ariaLabel={formatMessage(checkoutFormLabels.pay)}
+              label={formatMessage(commonMessages.processing)}
+            />
+          ) : (
+            <Button
+              ariaLabel={formatMessage(checkoutFormLabels.pay)}
+              label={formatMessage(checkoutFormMessages.pay)}
+              className="pay-button "
+              onClick={handleSubmit}
+              data-testid="pay-button"
+            />
+          ))}
+      </div>
     </div>
   );
 };

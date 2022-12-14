@@ -134,7 +134,10 @@ html {
 }
 .category-header-item button {
   transition: 0.2s;
+  color: #000;
+  border-color: hsl(0, 0%, 0%, 0.2);
 }
 .category-header-item button:hover {
   border-color: var(--theme);
+  background-color: transparent;
 }

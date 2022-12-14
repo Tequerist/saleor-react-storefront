@@ -15,7 +15,8 @@ export const Banner = () => {
     <Carousel
       autoPlay={true}
       infiniteLoop={true}
-      showArrows={true}
+      showArrows={false}
+      showStatus={false}
       renderArrowPrev={(onClickHandler, hasPrev, label) =>
         hasPrev && (
           <button
@@ -64,19 +65,25 @@ export const Banner = () => {
       }
     >
       <div className="w-full h-[30vh] bg-[url('/banner.png')] bg-cover flex flex-col items-center justify-center p-10">
-        <h1 className="text-[black] text-xl mb-4 font-semibold">Lorem ipsum is simply.</h1>
+        <h1 className="text-[black] sm:text-xl text-[26px] mb-4 font-semibold">
+          Lorem ipsum is simply.
+        </h1>
         <p className=" text-[gray] text-[16px]">
           Lorem Ipsum is simply dummy text of the printing and typesetting industry.
         </p>
       </div>
       <div className="w-full h-[30vh] bg-[url('/sample.jpg')] bg-cover flex flex-col items-center justify-center p-10">
-        <h1 className="text-[black] text-xl mb-4 font-semibold">Lorem ipsum is simply.</h1>
+        <h1 className="text-[black] sm:text-xl text-[26px] mb-4 font-semibold">
+          Lorem ipsum is simply.
+        </h1>
         <p className=" text-[gray] text-[16px]">
           Lorem Ipsum is simply dummy text of the printing and typesetting industry.
         </p>
       </div>
       <div className="w-full h-[30vh] bg-[url('/banner.png')] bg-cover flex flex-col items-center justify-center p-10">
-        <h1 className="text-[black] text-xl mb-4 font-semibold">Lorem ipsum is simply.</h1>
+        <h1 className="text-[black] sm:text-xl text-[26px] mb-4 font-semibold">
+          Lorem ipsum is simply.
+        </h1>
         <p className=" text-[gray] text-[16px]">
           Lorem Ipsum is simply dummy text of the printing and typesetting industry.
         </p>

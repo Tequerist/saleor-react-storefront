@@ -125,7 +125,7 @@ export const SummaryItemMoneyEditableSection: React.FC<LineItemQuantitySelectorP
   };
 
   return (
-    <div className="flex flex-col items-end h-20 relative -top-2">
+    <div className="flex flex-col items-end h-30 relative -top-2">
       <div className="flex flex-row items-baseline">
         <Text size="xs" className="mr-2">
           {formatMessage(summaryMessages.quantity)}:
@@ -145,7 +145,10 @@ export const SummaryItemMoneyEditableSection: React.FC<LineItemQuantitySelectorP
       ) : (
         <SummaryItemMoneyInfo {...line} classNames={{ container: "mt-1" }} />
       )}
-      <button className="text-[blue]" onClick={() => onLineDelete()}>
+      <button
+        className="mt-3 emptycartbtn justify-center w-fit !bg-gray !text-white !rounded-2xl px-4"
+        onClick={() => onLineDelete()}
+      >
         remove
       </button>
     </div>

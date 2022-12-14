@@ -33,7 +33,7 @@ function Home({ menuData }: InferGetStaticPropsType<typeof getStaticProps>) {
     <>
       <BaseSeo />
       <Banner />
-      <div className="py-10">
+      <div className="sm:py-10 py-0">
         <header className="mb-4">
           <div className="container" />
         </header>

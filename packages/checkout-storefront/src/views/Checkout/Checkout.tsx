@@ -26,7 +26,7 @@ export const Checkout = () => {
   ) : (
     <ErrorBoundary FallbackComponent={PageNotFound}>
       <div className="page">
-        <PageHeader />
+        <PageHeader isCartEmpty={isEmptyCart} />
         <div className="page-content">
           {isEmptyCart ? (
             <EmptyCartPage />

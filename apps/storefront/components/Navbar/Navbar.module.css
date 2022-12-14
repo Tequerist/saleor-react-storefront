@@ -88,6 +88,12 @@
 .user-menu {
   @apply absolute sm:top-[100%] right-0 shadow-modal flex flex-col invisible bg-white rounded-3xl p-4;
 }
+@media (min-width: 441px) {
+  .mobile-user-menu .user-menu {
+    @apply absolute top-[-100px] right-[-16rem] shadow-modal flex flex-col invisible bg-white rounded-3xl p-4;
+  }
+}
+
 @media (max-width: 440px) {
   .user-menu {
     bottom: 0;
